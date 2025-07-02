@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace RPG;
 
 public class Combat
@@ -17,13 +19,13 @@ public class Combat
         CharDmg = chrdmg;
     }
 
-    public bool Fight(string enemy, int initiativebonus, int initiativeEnemybonus) //Add enemy type to make Fight an automatic method***
+    public bool Fight(string enemy, int initiativebonus, int initiativeEnemybonus, int enemyid)
     {
         int TempChrdmg = CharDmg;
         int TempEndmg = EnemyDmg;
         int TempChrHp = CharHP;
         int TempEnHp = EnemyHP;
-        int Enemyac = Enemylist.Enemlist[0].Enemyac;
+        int Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
         int ACbonus = 0;
         int CharAC1 = CharacterList.Charlist[0].AC + ACbonus;
         bool combatend = false;
@@ -95,8 +97,11 @@ public class Combat
                         Console.WriteLine("You scored a hit!");
                         TempChrdmg = combatrandomiser.Next(CharDmg);
                         TempEnHp = TempEnHp - TempChrdmg;
+                        Thread.Sleep(1500);
                         Console.WriteLine($"{enemy} sustained {TempChrdmg} damage!");
+                        Thread.Sleep(800);
                         Console.WriteLine($"{enemy} now has {TempEnHp} HP!");
+                        Thread.Sleep(500);
                         if (TempEnHp <= 0)
                         {
                             Console.WriteLine($"{enemy} is dead! Congratulations!");
@@ -116,6 +121,7 @@ public class Combat
                         Console.WriteLine("You miss!");
                         turnorder = turnorder + 1;
                         combatend = false;
+                        Thread.Sleep(1000);
                         continue;
                     }
                     else if (hit == 20)
@@ -149,7 +155,7 @@ public class Combat
                 {
                     Thread.Sleep(500);
                     Console.WriteLine("You decided to defend yourself!");
-                    ACbonus = 1;
+                    ACbonus = 2;
                     CharACMain = CharacterList.Charlist[0].AC + ACbonus;
                     turnorder = turnorder + 1;
                     combatend = false;
@@ -158,10 +164,39 @@ public class Combat
                 }
                 else if (uinpturn == "3")
                 {
-                    Console.WriteLine("Feature not modeled yet!");
-                    turnorder = 0;
-                    combatend = false;
-                    continue;
+                    int i = 0;
+                    bool exititems = false;
+                    do
+                    {
+                        Console.WriteLine("Here is the list of your items!");
+                        foreach (Items c in Itemlistsystem.Itemlist)
+                        {
+                            i = i + 1;
+                            Console.WriteLine($"{i}{c}");
+                        }
+                        Console.WriteLine("1. Exit menu");
+                        Console.WriteLine("2. Use item");
+                        Console.WriteLine("3. Discard item");
+                        turnorder = 0;
+                        combatend = false;
+                        string uinpitmenu = Console.ReadLine();
+                        if (uinpitmenu == "1")
+                        {
+                            turnorder = 0;
+                            combatend = false;
+                            continue;
+
+                        }
+                        else if (uinpitmenu == "2")
+                        {
+
+                        }
+                        else if (uinpitmenu == "3")
+                        {
+
+                        }
+
+                    } while (!exititems);
 
                 }
                 else if (uinpturn == "4")
@@ -178,6 +213,7 @@ public class Combat
                     else
                     {
                         Console.WriteLine("Escape failed!");
+                        Thread.Sleep(1000);
                         initiativebonus = initiativebonus - 10;
                         combatend = false;
                         turnorder = turnorder + 1;
@@ -189,20 +225,23 @@ public class Combat
             }
             else if (turnorder == 1)
             {
-                Enemyac = Enemylist.Enemlist[0].Enemyac;
+                Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
                 Console.WriteLine($"{enemy} Has the turn!");
                 Thread.Sleep(1000);
-                int enact = combatrandomiser.Next(1, 2);
+                int enact = combatrandomiser.Next(1, 3);
                 if (enact == 1)
                 {
                     int enhit = combatrandomiser.Next(20);
                     if (enhit > CharACMain)
                     {
                         Console.WriteLine($"{enemy} atacks you!");
+                        Thread.Sleep(1000);
                         TempEndmg = combatrandomiser.Next(EnemyDmg);
                         TempChrHp = TempChrHp - TempEndmg;
                         Console.WriteLine($"You sustained {TempEndmg} damage!");
+                        Thread.Sleep(1000);
                         Console.WriteLine($"Your HP is lowered to {TempChrHp}");
+                        Thread.Sleep(1000);
                         if (TempChrHp <= 0)
                         {
                             Console.WriteLine("You are Dead!");
@@ -218,6 +257,7 @@ public class Combat
                     else if (enhit < CharACMain)
                     {
                         Console.WriteLine($"{enemy} misses!");
+                        Thread.Sleep(1000);
                         turnorder = 0;
                         continue;
                     }
@@ -227,6 +267,7 @@ public class Combat
                 else if (enact == 2)
                 {
                     Console.WriteLine($"{enemy} defends itself! Its AC is raised by 1");
+                    Thread.Sleep(1000);
                     Enemyac = Enemyac + 1;
                     turnorder = 0;
                     combatend = false;
@@ -261,22 +302,25 @@ public class Enemy
     public  int EnemyINI { get; set; }
     public  int Enemyac { get; set; }
 
+    public int enemyid { get; set; }
+
     Enemy() { }
 
-    public Enemy(string EnName, int EnDmg, int EnHp, int EnIni, int EnAC) // todo add armor class(ac) and finish the combat system in the page gamestart!
+    public Enemy(string EnName, int EnDmg, int EnHp, int EnIni, int EnAC, int enid) // todo add armor class(ac) and finish the combat system in the page gamestart!
     {
         EnemyType = EnName;
         EnemyDmg = EnDmg;
         EnemyHealth = EnHp;
         EnemyINI = EnIni;
         Enemyac = EnAC;
+        enemyid = enid;
     }
 
     public static void Enemys()
     {
-        Enemy rat = new Enemy("Rat",9, 30, 3, 10);
+        Enemy rat = new Enemy("Rat",9, 30, 3, 10, 0); // id 0
         Enemylist.Enemlist.Add(rat);
-        Enemy wolf = new Enemy("Wolf",15, 60, 5, 12);
+        Enemy wolf = new Enemy("Wolf",15, 60, 5, 12, 1); // id 1
         Enemylist.Enemlist.Add(wolf);
 
 

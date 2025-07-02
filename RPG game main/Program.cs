@@ -5,8 +5,9 @@ namespace RPG;
 
 class Game
 {
-     public List<Character> charinfo = new List<Character>();
+    public List<Character> charinfo = new List<Character>();
     public List<Enemy> enemyinfo = new List<Enemy>();
+
     public static void Main(string[] args)
     {
 
@@ -47,10 +48,9 @@ class Game
             }
             else if (uinpmain == "1")
             {
-                //Cutsczene.StartingSzene();
-                //string uinpdecis1 = Cutsczene.PlotM1();
-                string uinpdecis1 = "3";
-                Cutsczene.PlotM2(uinpdecis1);
+                Cutsczene.StartingSzene();
+                string uinpdecis1 = Cutsczene.PlotM1();
+                string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
 
 
 

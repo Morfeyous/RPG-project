@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace RPG;
 
 public class Cutsczene
@@ -95,7 +97,8 @@ public class Cutsczene
 
                     charbonus = charbonus + 2;
                     chrbonuscheck2 = chrbonuscheck2 + 1;
-                    Weapons Stick = new Weapons(5);
+                    Items stick = new Items("Stick", 5, 0, 0);
+                    Itemlistsystem.Itemlist.Add(stick);
                 }
                 else { Console.WriteLine("You already searched the Glade. You find nothing useful"); }
             }
@@ -108,6 +111,13 @@ public class Cutsczene
 
     static public string PlotM2(string bonus)
     {
+        Enemy rat = new Enemy("Rat", 9, 30, 3, 10,0); //added here enemy creation for test reasons. Remove afterwards!
+        Enemylist.Enemlist.Add(rat);
+        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12,1);
+        Enemylist.Enemlist.Add(wolf);
+        Dictionary<string, Enemy> Enemys = Enemylist.Enemlist.ToDictionary(c => c.EnemyType);
+        wolf = Enemys["Wolf"];
+        rat = Enemys["Rat"];
         Console.WriteLine("You go forward through the narrow path ");
         Thread.Sleep(2500);
         if (bonus == "3")
@@ -133,17 +143,134 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
-                    Enemy rat = new Enemy("Rat",9, 30, 3, 10); //added here enemy creation for test reasons. Remove afterwards!
-                    Enemylist.Enemlist.Add(rat);
-                    Enemy wolf = new Enemy("Wolf",15, 60, 5, 12);
-                    Enemylist.Enemlist.Add(wolf);
+                    
+                    int CharHP = CharacterList.Charlist[0].HP;
+                    int CharDmg = CharacterList.Charlist[0].Damage + Itemlistsystem.Itemlist[0].DamageBonus; //TODO later: add class weapons and auto add properties
+                    int EnemyHP = rat.EnemyHealth;
+                    int EnemyDmg = rat.EnemyDmg; //added that list properties are called from a dictionary instad of calling them via id
+                    Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);//use later: weapons, characters etc
+                    bool combat1 = fight1.Fight(rat.EnemyType, 5,rat.EnemyINI, 0);
+                    fight1over = combat1;
+                    bonus = bonus + 1;
+                    continue;
+
+
+                }
+                else if (uinpfight1 == "2" && escapetry == 0)
+                {
+                    if (escapechance > 30)
+                    {
+                        Console.WriteLine("You Escaped!");
+                        fight1over = true;
+                        bonus = "3";
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You couldnt escape! Prepare for Combat!");
+                        escapetry = escapetry + 1;
+                    }
+
+
+
+                }
+                else if (escapetry > 0)
+                {
+                    Console.WriteLine("You already tried to escape !");
+                }
+                else { Console.WriteLine("Invalid Input"); }
+            } while (!fight1over);
+
+
+        }
+        else if (bonus == "2")
+        {
+            int escapetry = 0;
+            Random randomiser = new Random(0);
+            int escapechance = randomiser.Next(101);
+            bool fight1over = false;
+            Console.WriteLine("You were going forward wielding your stick");
+            Thread.Sleep(3000);
+            Console.WriteLine("In the grass something moved and you notice a rat");
+            Thread.Sleep(3000);
+            Console.WriteLine("The rat has red glowing eyes and she is prepared for an attack");
+            Thread.Sleep(3000);
+            do
+            {
+                Console.WriteLine("What will you do?");
+                Console.WriteLine("");
+                Console.WriteLine("1. Fight");
+                Console.WriteLine("2. Try to Escape");
+                string uinpfight1 = Console.ReadLine();
+                if (uinpfight1 == "1")
+                {
+                    
                     int CharHP = CharacterList.Charlist[0].HP;
                     int CharDmg = CharacterList.Charlist[0].Damage + 5; //TODO later: add class weapons and auto add properties
-                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; // Exception out of range here. Not loading enemy info
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
-                    bool combat1 = fight1.Fight(Enemylist.Enemlist[0].EnemyType, 5, Enemylist.Enemlist[0].EnemyINI);
-                    Console.WriteLine(combat1); //test
+                    bool combat1 = fight1.Fight(rat.EnemyType, 0, rat.EnemyINI,rat.enemyid);
+                    fight1over = combat1;
+                    continue;
+
+
+                }
+                else if (uinpfight1 == "2" && escapetry == 0)
+                {
+                    if (escapechance > 50)
+                    {
+                        Console.WriteLine("You Escaped!");
+                        fight1over = true;
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You couldnt escape! Prepare for Combat!");
+                        escapetry = escapetry + 1;
+                    }
+
+
+
+                }
+                else if (escapetry > 0)
+                {
+                    Console.WriteLine("You already tried to escape !");
+                }
+                else { Console.WriteLine("Invalid Input"); }
+            } while (!fight1over);
+
+        }
+        else if (bonus == "1")
+        {
+            int escapetry = 0;
+            Random randomiser = new Random(0);
+            int escapechance = randomiser.Next(101);
+            bool fight1over = false;
+            Console.WriteLine("When going forward you excerscized caution");
+            Thread.Sleep(3000);
+            Console.WriteLine("Because you were cautious you spotted a rat that hid in the grass.");
+            Thread.Sleep(3000);
+            Console.WriteLine("The rat has red glowing eyes and she is prepared for an attack");
+            Thread.Sleep(3000);
+            Console.WriteLine("Because you noticed her in time you have a chance to escape!");
+            Thread.Sleep(2000);
+            do
+            {
+                Console.WriteLine("What will you do?");
+                Console.WriteLine("");
+                Console.WriteLine("1. Fight");
+                Console.WriteLine("2. Try to Escape");
+                string uinpfight1 = Console.ReadLine();
+                if (uinpfight1 == "1")
+                {
+                    
+                    int CharHP = CharacterList.Charlist[0].HP;
+                    int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
+                    int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
+                    Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                    bool combat1 = fight1.Fight(rat.EnemyType, 5, rat.EnemyINI, rat.enemyid);
                     fight1over = combat1;
                     continue;
 
@@ -172,11 +299,85 @@ public class Cutsczene
                 }
                 else { Console.WriteLine("Invalid Input"); }
             } while (!fight1over);
-
-
         }
-        return "test";
-        
+        else if (bonus == "0")
+        {
+            int escapetry = 0;
+            Random randomiser = new Random(0);
+            int escapechance = randomiser.Next(101);
+            bool fight1over = false;
+            Console.WriteLine("You were going forward carefully pushing branches away");
+            Thread.Sleep(3000);
+            Console.WriteLine("Something moved in the grass beneath you");
+            Thread.Sleep(3000);
+            Console.WriteLine("It was a rat that was about to atack!");
+            Thread.Sleep(3000);
+            Console.WriteLine("Because you noticed it too late you have almost no time to escape");
+            Thread.Sleep(2000);
+            do
+            {
+                Console.WriteLine("What will you do?");
+                Console.WriteLine("");
+                Console.WriteLine("1. Fight");
+                Console.WriteLine("2. Try to Escape");
+                string uinpfight1 = Console.ReadLine();
+                if (uinpfight1 == "1")
+                {
+                    
+                    int CharHP = CharacterList.Charlist[0].HP;
+                    int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
+                    int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
+                    Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                    bool combat1 = fight1.Fight(rat.EnemyType, -3, rat.EnemyINI, rat.enemyid);
+                    fight1over = combat1;
+                    continue;
+
+
+                }
+                else if (uinpfight1 == "2" && escapetry == 0)
+                {
+                    if (escapechance > 70)
+                    {
+                        Console.WriteLine("You Escaped!");
+                        fight1over = true;
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You couldnt escape! Prepare for Combat!");
+                        escapetry = escapetry + 1;
+                    }
+
+
+
+                }
+                else if (escapetry > 0)
+                {
+                    Console.WriteLine("You already tried to escape !");
+                }
+                else { Console.WriteLine("Invalid Input"); }
+            } while (!fight1over);
+        }
+        return bonus;
+
+    }
+
+    static public string PlotM3(string bonus)
+    {
+        Console.WriteLine("After defeating the rat you decide not to wait any longer");
+        Thread.Sleep(3000);
+        Console.WriteLine("You go forwad soon coming to a wider road through the forest.");
+        Console.WriteLine("It is up to you if you want to follow the road or not");
+        Console.WriteLine("");
+        Console.WriteLine("1. Follow the road");
+        Console.WriteLine("2. Leave the road and go into the forest.");
+        Console.WriteLine("");
+        string uinpcrossroad1 = Console.ReadLine();
+        if // TODO finish the plot part. Try to figure out how to do the item system better. If not able just proceed and use the easier one
+        //add info check for the character. its easy so finish tomorow. Dont forget the bericht too and update git.
+
+
     }
 
 

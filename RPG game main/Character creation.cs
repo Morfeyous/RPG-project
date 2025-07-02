@@ -38,7 +38,7 @@ public class Character
         do
         {
 
-
+            
             Console.WriteLine("Chose your class!");
             Console.WriteLine("");
             Console.WriteLine("1. Warrior");
