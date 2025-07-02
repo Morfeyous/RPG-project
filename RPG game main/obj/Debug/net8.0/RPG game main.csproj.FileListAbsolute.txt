@@ -12,3 +12,4 @@ C:\projects\RPG\RPG game main\obj\Debug\net8.0\refint\RPG game main.dll
 C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.pdb
 C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.genruntimeconfig.cache
 C:\projects\RPG\RPG game main\obj\Debug\net8.0\ref\RPG game main.dll
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.sourcelink.json

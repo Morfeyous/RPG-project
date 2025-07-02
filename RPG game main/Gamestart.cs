@@ -37,6 +37,7 @@ public class Cutsczene
         Console.WriteLine("What do you do?");
         Thread.Sleep(1000);
         Console.WriteLine("");
+        Thread.Sleep(1500);
         do
         {
             Console.WriteLine("1. Follow the Path forward");
@@ -89,6 +90,7 @@ public class Cutsczene
                     Thread.Sleep(2000);
                     Console.WriteLine("Its heavy and pretty strong so you decide to take it");
                     Console.WriteLine("");
+                    Thread.Sleep(1500);
                     check1 = false;
 
                     charbonus = charbonus + 2;
@@ -131,11 +133,19 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
+                    Enemy rat = new Enemy("Rat",9, 30, 3, 10); //added here enemy creation for test reasons. Remove afterwards!
+                    Enemylist.Enemlist.Add(rat);
+                    Enemy wolf = new Enemy("Wolf",15, 60, 5, 12);
+                    Enemylist.Enemlist.Add(wolf);
                     int CharHP = CharacterList.Charlist[0].HP;
                     int CharDmg = CharacterList.Charlist[0].Damage + 5; //TODO later: add class weapons and auto add properties
-                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; // Exception out of range here. Not loading enemy info
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                    bool combat1 = fight1.Fight(Enemylist.Enemlist[0].EnemyType, 5, Enemylist.Enemlist[0].EnemyINI);
+                    Console.WriteLine(combat1); //test
+                    fight1over = combat1;
+                    continue;
 
 
                 }
@@ -165,6 +175,7 @@ public class Cutsczene
 
 
         }
+        return "test";
         
     }
 
