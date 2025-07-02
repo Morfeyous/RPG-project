@@ -13,7 +13,7 @@ public class Cutsczene
         Thread.Sleep(3000);
         Console.WriteLine("It is unusualy quiet for a forest, you hear no signs of life around");
         Thread.Sleep(4000);
-        Console.WriteLine("Only the sound of wind in the trees is disturbing the silence");
+        Console.WriteLine("Only the sound of wind in the trees are disturbing the silence");
         Thread.Sleep(3000);
         Console.WriteLine("Otherwise...");
         Thread.Sleep(2500);
@@ -65,6 +65,7 @@ public class Cutsczene
                 Console.WriteLine("You hear nothing except the sounds of wind somewhere above");
                 Thread.Sleep(2000);
                 Console.WriteLine("You feel that this forest it not so simple as it looks. You decide to stay sharp");
+                Thread.Sleep(4000);
                 Console.WriteLine("");
                 check1 = false;
                 if (chrbonuscheck3 == 0)
@@ -368,13 +369,15 @@ public class Cutsczene
         Console.WriteLine("After defeating the rat you decide not to wait any longer");
         Thread.Sleep(3000);
         Console.WriteLine("You go forwad soon coming to a wider road through the forest.");
+        Thread.Sleep(3000);
         Console.WriteLine("It is up to you if you want to follow the road or not");
+        Thread.Sleep(3000);
         Console.WriteLine("");
         Console.WriteLine("1. Follow the road");
         Console.WriteLine("2. Leave the road and go into the forest.");
         Console.WriteLine("");
         string uinpcrossroad1 = Console.ReadLine();
-        if // TODO finish the plot part. Try to figure out how to do the item system better. If not able just proceed and use the easier one
+        return "test"; // TODO finish the plot part. Try to figure out how to do the item system better. If not able just proceed and use the easier one
         //add info check for the character. its easy so finish tomorow. Dont forget the bericht too and update git.
 
 

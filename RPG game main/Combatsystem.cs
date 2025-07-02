@@ -228,7 +228,7 @@ public class Combat
                 Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
                 Console.WriteLine($"{enemy} Has the turn!");
                 Thread.Sleep(1000);
-                int enact = combatrandomiser.Next(1, 3);
+                int enact = combatrandomiser.Next(3);
                 if (enact == 1)
                 {
                     int enhit = combatrandomiser.Next(20);
