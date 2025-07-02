@@ -1,0 +1,14 @@
+C:\projects\RPG\RPG game main\bin\Debug\net8.0\RPG game main.exe
+C:\projects\RPG\RPG game main\bin\Debug\net8.0\RPG game main.deps.json
+C:\projects\RPG\RPG game main\bin\Debug\net8.0\RPG game main.runtimeconfig.json
+C:\projects\RPG\RPG game main\bin\Debug\net8.0\RPG game main.dll
+C:\projects\RPG\RPG game main\bin\Debug\net8.0\RPG game main.pdb
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.GeneratedMSBuildEditorConfig.editorconfig
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.AssemblyInfoInputs.cache
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.AssemblyInfo.cs
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.csproj.CoreCompileInputs.cache
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.dll
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\refint\RPG game main.dll
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.pdb
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\RPG game main.genruntimeconfig.cache
+C:\projects\RPG\RPG game main\obj\Debug\net8.0\ref\RPG game main.dll
