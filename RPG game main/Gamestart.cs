@@ -61,7 +61,7 @@ public class Cutsczene
                 Console.WriteLine("..");
                 Thread.Sleep(1000);
                 Console.WriteLine("...");
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
                 Console.WriteLine("You hear nothing except the sounds of wind somewhere above");
                 Thread.Sleep(2000);
                 Console.WriteLine("You feel that this forest it not so simple as it looks. You decide to stay sharp");
@@ -70,6 +70,7 @@ public class Cutsczene
                 check1 = false;
                 if (chrbonuscheck3 == 0)
                 {
+                    CharacterList.Charlist[0].Initiative = CharacterList.Charlist[0].Initiative + 4;
                     charbonus = charbonus + 1;
                     chrbonuscheck3 = chrbonuscheck3 + 1;
                 }
@@ -88,7 +89,7 @@ public class Cutsczene
                     Console.WriteLine("..");
                     Thread.Sleep(1000);
                     Console.WriteLine("...");
-                    Thread.Sleep(500);
+                    Thread.Sleep(1000);
                     Console.WriteLine("You have found a stick. ");
                     Thread.Sleep(2000);
                     Console.WriteLine("Its heavy and pretty strong so you decide to take it");
@@ -98,8 +99,8 @@ public class Cutsczene
 
                     charbonus = charbonus + 2;
                     chrbonuscheck2 = chrbonuscheck2 + 1;
-                    Items stick = new Items("Stick", 5, 0, 0);
-                    Itemlistsystem.Itemlist.Add(stick);
+                    weapon stick = new weapon("Stick", 5);
+                    Weaponlist.Weaponlists.Add(stick);
                 }
                 else { Console.WriteLine("You already searched the Glade. You find nothing useful"); }
             }
@@ -112,9 +113,9 @@ public class Cutsczene
 
     static public string PlotM2(string bonus)
     {
-        Enemy rat = new Enemy("Rat", 9, 30, 3, 10,0); //added here enemy creation for test reasons. Remove afterwards!
+        Enemy rat = new Enemy("Rat", 9, 30, 3, 10, 0);
         Enemylist.Enemlist.Add(rat);
-        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12,1);
+        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12, 1);
         Enemylist.Enemlist.Add(wolf);
         Dictionary<string, Enemy> Enemys = Enemylist.Enemlist.ToDictionary(c => c.EnemyType);
         wolf = Enemys["Wolf"];
@@ -144,15 +145,24 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
-                    
+
                     int CharHP = CharacterList.Charlist[0].HP;
-                    int CharDmg = CharacterList.Charlist[0].Damage + Itemlistsystem.Itemlist[0].DamageBonus; //TODO later: add class weapons and auto add properties
+                    int CharDmg = CharacterList.Charlist[0].Damage + Weaponlist.Weaponlists[0].DmgAdd(); //TODO later: add class weapons and auto add properties
                     int EnemyHP = rat.EnemyHealth;
                     int EnemyDmg = rat.EnemyDmg; //added that list properties are called from a dictionary instad of calling them via id
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);//use later: weapons, characters etc
-                    bool combat1 = fight1.Fight(rat.EnemyType, 5,rat.EnemyINI, 0);
-                    fight1over = combat1;
-                    bonus = bonus + 1;
+                    bool combat1 = fight1.Fight(rat.EnemyType, 5, rat.EnemyINI, 0);
+                    fight1over = true;
+                    if (combat1 == true)
+                    {
+                        bonus = "true";
+                    }
+                    else if (combat1 == false)
+                    {
+                        bonus = "false";
+                    }
+                    Console.WriteLine("You recieve 5 gold!");
+                    Game.herogold.Gold += 5;
                     continue;
 
 
@@ -163,7 +173,7 @@ public class Cutsczene
                     {
                         Console.WriteLine("You Escaped!");
                         fight1over = true;
-                        bonus = "3";
+                        bonus = "false";
                         continue;
                     }
                     else
@@ -205,14 +215,24 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
-                    
+
                     int CharHP = CharacterList.Charlist[0].HP;
                     int CharDmg = CharacterList.Charlist[0].Damage + 5; //TODO later: add class weapons and auto add properties
-                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
-                    bool combat1 = fight1.Fight(rat.EnemyType, 0, rat.EnemyINI,rat.enemyid);
-                    fight1over = combat1;
+                    bool combat1 = fight1.Fight(rat.EnemyType, 0, rat.EnemyINI, rat.enemyid);
+                    fight1over = true;
+                    if (combat1 == true)
+                    {
+                        bonus = "true";
+                    }
+                    else if (combat1 == false)
+                    {
+                        bonus = "false";
+                    }
+                    Console.WriteLine("You recieve 5 gold!");
+                    Game.herogold.Gold += 5;
                     continue;
 
 
@@ -223,6 +243,7 @@ public class Cutsczene
                     {
                         Console.WriteLine("You Escaped!");
                         fight1over = true;
+                        bonus = "false";
                         continue;
                     }
                     else
@@ -265,14 +286,24 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
-                    
+
                     int CharHP = CharacterList.Charlist[0].HP;
                     int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
-                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
                     bool combat1 = fight1.Fight(rat.EnemyType, 5, rat.EnemyINI, rat.enemyid);
-                    fight1over = combat1;
+                    fight1over = true;
+                    if (combat1 == true)
+                    {
+                        bonus = "true";
+                    }
+                    else if (combat1 == false)
+                    {
+                        bonus = "false";
+                    }
+                    Console.WriteLine("You recieve 5 gold!");
+                    Game.herogold.Gold += 5;
                     continue;
 
 
@@ -283,6 +314,7 @@ public class Cutsczene
                     {
                         Console.WriteLine("You Escaped!");
                         fight1over = true;
+                        bonus = "false";
                         continue;
                     }
                     else
@@ -324,14 +356,24 @@ public class Cutsczene
                 string uinpfight1 = Console.ReadLine();
                 if (uinpfight1 == "1")
                 {
-                    
+
                     int CharHP = CharacterList.Charlist[0].HP;
                     int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
-                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth; 
+                    int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
                     bool combat1 = fight1.Fight(rat.EnemyType, -3, rat.EnemyINI, rat.enemyid);
-                    fight1over = combat1;
+                    fight1over = true;
+                    if (combat1 == true)
+                    {
+                        bonus = "true";
+                    }
+                    else if (combat1 == false)
+                    {
+                        bonus = "false";
+                    }
+                    Console.WriteLine("You recieve 5 gold!");
+                    Game.herogold.Gold += 5;
                     continue;
 
 
@@ -342,6 +384,7 @@ public class Cutsczene
                     {
                         Console.WriteLine("You Escaped!");
                         fight1over = true;
+                        bonus = "false";
                         continue;
                     }
                     else
@@ -366,23 +409,251 @@ public class Cutsczene
 
     static public string PlotM3(string bonus)
     {
-        Console.WriteLine("After defeating the rat you decide not to wait any longer");
-        Thread.Sleep(3000);
-        Console.WriteLine("You go forwad soon coming to a wider road through the forest.");
+        string outcome1 = "0";
+        bool crossroadend = false;
+        if (bonus == "true")
+        {
+            Console.WriteLine("After defeating the rat you decide not to wait any longer");
+            Thread.Sleep(3000);
+        }
+        Console.WriteLine("You go forward, soon coming to a wider road through the forest.");
         Thread.Sleep(3000);
         Console.WriteLine("It is up to you if you want to follow the road or not");
-        Thread.Sleep(3000);
-        Console.WriteLine("");
-        Console.WriteLine("1. Follow the road");
-        Console.WriteLine("2. Leave the road and go into the forest.");
-        Console.WriteLine("");
-        string uinpcrossroad1 = Console.ReadLine();
-        return "test"; // TODO finish the plot part. Try to figure out how to do the item system better. If not able just proceed and use the easier one
+        do
+        {
+            Thread.Sleep(3000);
+            Console.WriteLine("");
+            Console.WriteLine("1. Follow the road");
+            Console.WriteLine("2. Leave the road and go into the forest.");
+            Console.WriteLine("");
+            string uinpcrossroad1 = Console.ReadLine();
+            if (uinpcrossroad1 == "1")
+            {
+                string decision1 = PlotB1();
+
+
+
+            }
+            else if (uinpcrossroad1 == "2")
+            {
+                string decision2 = PlotB2();
+                outcome1 = decision2;
+                crossroadend = true;
+
+
+            }
+            else { Console.WriteLine("Invalid command!"); }
+        } while (!crossroadend);
+        return outcome1; // TODO finish the plot part. Try to figure out how to do the item system better. If not able just proceed and use the easier one
         //add info check for the character. its easy so finish tomorow. Dont forget the bericht too and update git.
 
 
     }
 
+    static public string PlotB1() //1 - mines // 2 - village
+    {
+        int uinpdesiccross = 0;
+        bool crossroadend2 = false;
+        Console.WriteLine("You decide to follow the road!");
+        Thread.Sleep(3000);
+        Console.WriteLine("This road looks like the only thread connecting you to the real world");
+        Thread.Sleep(3000);
+        Console.WriteLine("And the dark forest around you is something that goes out of it");
+        Thread.Sleep(3000);
+        Console.WriteLine("After a brief moment of walking you notice that road starts to widen");
+        Thread.Sleep(3000);
+        Console.WriteLine("Finaly you reach an another crossroad");
+        Thread.Sleep(3000);
+        Console.WriteLine("The road goes left and right");
+        Thread.Sleep(3000);
+        Console.WriteLine("You also see a sign that says");
+        Thread.Sleep(3000);
+        Console.WriteLine("Crystal Mines--> \n <--Miner Village");
+        Thread.Sleep(3000);
+        Console.WriteLine("And yet again it is your decision where to go");
+        Thread.Sleep(3000);
+        do
+        {
+            Console.WriteLine("1.Crystal Mines");
+            Console.WriteLine("2.Miner Village");
+            Console.WriteLine("");
+            Console.WriteLine("You WILL be able to return*");
+            string uinpcrossroad2 = Console.ReadLine();
+            if (uinpcrossroad2 == "1")
+            {
+                uinpdesiccross = uinpdesiccross + 1;
+                crossroadend2 = true;
+                continue;
+            }
+            else if (uinpcrossroad2 == "2")
+            {
+                uinpdesiccross = uinpdesiccross + 2;
+                crossroadend2 = true;
+                continue;
+            }
+            else { Console.WriteLine("Invalid Input!"); }
+        } while (!crossroadend2);
+        string PlotB1Decis1 = Convert.ToString(uinpdesiccross);
+        return PlotB1Decis1;
 
+    }
+
+    static public string PlotB2()
+    {
+        Random randomiser = new Random(0);
+        int escapechance = randomiser.Next(101);
+        int escapetry = 0;
+        string plotb2end = "0";
+        bool fight2over = false;
+        Console.WriteLine("You decide to strand in the forest in case there is an ambush on the road");
+        Thread.Sleep(4000);
+        Console.WriteLine("You go deeper and deeper into the darkness");
+        Thread.Sleep(3000);
+        Console.WriteLine("You hear strange sounds somewhere deep in the forest");
+        Thread.Sleep(3000);
+        Console.WriteLine("Suddenly the bushes in front of you start to shake");
+        Thread.Sleep(3000);
+        Console.WriteLine("A gray wolf walks out of them and looks right at you");
+        Thread.Sleep(3000);
+        Console.WriteLine("There is some distance between you but you are certain that running away from this one is not an option");
+        Thread.Sleep(5000);
+        Console.WriteLine("The wolf howls and you hear distant answer of his brothers.");
+        Thread.Sleep(3000);
+        Console.WriteLine("What will you do?");
+        Thread.Sleep(1000);
+        Console.WriteLine("");
+        do
+        {
+            Console.WriteLine("1. Fight");
+            Console.WriteLine("2. Try to escape back to the road");
+            Console.WriteLine("3. Try to escape deeper into the forest");
+            Console.WriteLine("4. Check stats");
+            Console.WriteLine("");
+            Thread.Sleep(1000);
+
+            string uinpdecisforest = Console.ReadLine();
+            if (uinpdecisforest == "1")
+            {
+                int CharHP = CharacterList.Charlist[0].HP;
+                var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
+                int CharDmg = CharacterList.Charlist[0].Damage + (stick?.DamageBonus ?? 0);
+                int EnemyDmg = Enemylist.Enemlist[1].EnemyDmg;
+                int EnemyHP = Enemylist.Enemlist[1].EnemyHealth;
+                int enemyini = Enemylist.Enemlist[1].EnemyINI;
+                string enemytype = Enemylist.Enemlist[1].EnemyType;
+                Combat fight2 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                bool combat2 = fight2.Fight(enemytype, 0, enemyini, 1);
+                fight2over = combat2;
+                fight2over = true;
+                Console.WriteLine("You recieved 10 gold"); // todo add escape branch for plot in this battle
+                Game.herogold.Gold += 10;
+                Thread.Sleep(4000);
+                plotb2end = "1";
+
+            }
+            else if (uinpdecisforest == "2" && escapetry == 0)
+            {
+                if (escapechance > 60)
+                {
+                    Console.WriteLine("You Escaped!");
+                    fight2over = true;
+                    plotb2end = "2";
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine("You couldnt escape! Prepare for Combat!");
+                    escapetry = escapetry + 1;
+                }
+
+
+            }
+            else if (uinpdecisforest == "3" && escapetry == 0)
+            {
+                if (escapechance > 30)
+                {
+                    Console.WriteLine("You Escaped!");
+                    fight2over = true;
+                    plotb2end = "3";
+                    continue;
+                }
+                else
+                {
+                    Console.WriteLine("You couldnt escape! Prepare for Combat!");
+                    escapetry = escapetry + 1;
+                }
+
+            }
+            else if (uinpdecisforest == "4")
+            {
+                string charinfo = CharacterList.Charlist[0].PrintCharInfo();
+                Console.WriteLine(charinfo);
+                Console.WriteLine($"Gold: {Game.herogold.Gold}");
+                foreach (weapon c in Weaponlist.Weaponlists)
+                {
+                    Console.WriteLine($"Weapon:\n{c}");
+                }
+                fight2over = false;
+                continue;
+
+            }
+            else { Console.WriteLine("Invalid Input!"); }
+        } while (!fight2over);
+        return plotb2end;
+
+
+    }
+
+    public static string PlotB2V1(string plotb2end)
+    {
+        Enemy wolfpack = new Enemy("Wolfpack", 30, 100,40, 7, 2); //id 2
+        Enemylist.Enemlist.Add(wolfpack);
+        string plotB2V1end = "0";
+        Console.WriteLine("After defeating the wolf you hear howling that is coming towards you from the deep forest ");
+        Thread.Sleep(4000);
+        Console.WriteLine("You still have a chance to try and escape the szene until they found you");
+        Thread.Sleep(4000);
+        Console.WriteLine("What do you do?");
+        Thread.Sleep(2500);
+        Console.WriteLine("");
+        Console.WriteLine("1. Run back to the road");
+        Console.WriteLine("2. Stay and fight");
+        Console.WriteLine("3. Run in another direction deeper into the forest");
+        Console.WriteLine("");
+        string uinpdesiforest2 = Console.ReadLine();
+        if (uinpdesiforest2 == "1")
+        {
+            plotB2V1end = "2";
+        }
+        else if (uinpdesiforest2 == "2")
+        {
+            Console.WriteLine("You decided to stay and face them!");
+            Thread.Sleep(3500);
+            Console.WriteLine("A wolfpack emerges from the darkness");
+            Thread.Sleep(3500);
+            Console.WriteLine("There is a lot of them and you feel shivers crawling down your spine");
+            Thread.Sleep(3500);
+            Console.WriteLine("You notice that you are surrounded and there is no way to escape");
+            Thread.Sleep(3500);
+            Console.WriteLine("Good Luck...");
+            Thread.Sleep(2500);
+            int CharHP = CharacterList.Charlist[0].HP;
+            var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
+            int CharDmg = CharacterList.Charlist[0].Damage + (stick?.DamageBonus ?? 0);
+            int EnemyDmg = Enemylist.Enemlist[2].EnemyDmg;
+            int EnemyHP = Enemylist.Enemlist[2].EnemyHealth;
+            int enemyini = Enemylist.Enemlist[2].EnemyINI;
+            string enemytype = Enemylist.Enemlist[2].EnemyType;
+            Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+            bool combat2 = fight3.Fight(enemytype, 0, enemyini, 2);
+
+        }
+        else if (uinpdesiforest2 == "3")
+        {
+            plotB2V1end = "3";
+
+        }
+        return plotB2V1end;
+    }
 
 }

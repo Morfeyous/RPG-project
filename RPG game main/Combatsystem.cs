@@ -21,6 +21,7 @@ public class Combat
 
     public bool Fight(string enemy, int initiativebonus, int initiativeEnemybonus, int enemyid)
     {
+        int escapecheck = 0;
         int TempChrdmg = CharDmg;
         int TempEndmg = EnemyDmg;
         int TempChrHp = CharHP;
@@ -84,7 +85,7 @@ public class Combat
                 Console.WriteLine("What will you do in your turn?");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Defend");
-                Console.WriteLine("3. Items");  //TODO add items in future. Now focus on combat system//
+                Console.WriteLine("3. Stats");  //TODO add items in future. Now focus on combat system//
                 Console.WriteLine("4. Escape");
                 Console.WriteLine("");
                 string? uinpturn = Console.ReadLine();
@@ -164,40 +165,16 @@ public class Combat
                 }
                 else if (uinpturn == "3")
                 {
-                    int i = 0;
-                    bool exititems = false;
-                    do
+                    string charinfo = CharacterList.Charlist[0].PrintCharInfo();
+                    Console.WriteLine(charinfo);
+                    Console.WriteLine($"Gold: {Game.herogold.Gold}");
+                    foreach (weapon c in Weaponlist.Weaponlists)
                     {
-                        Console.WriteLine("Here is the list of your items!");
-                        foreach (Items c in Itemlistsystem.Itemlist)
-                        {
-                            i = i + 1;
-                            Console.WriteLine($"{i}{c}");
-                        }
-                        Console.WriteLine("1. Exit menu");
-                        Console.WriteLine("2. Use item");
-                        Console.WriteLine("3. Discard item");
-                        turnorder = 0;
-                        combatend = false;
-                        string uinpitmenu = Console.ReadLine();
-                        if (uinpitmenu == "1")
-                        {
-                            turnorder = 0;
-                            combatend = false;
-                            continue;
-
-                        }
-                        else if (uinpitmenu == "2")
-                        {
-
-                        }
-                        else if (uinpitmenu == "3")
-                        {
-
-                        }
-
-                    } while (!exititems);
-
+                        Console.WriteLine($"Weapon:\n{c}");
+                    }
+                    Console.WriteLine("");
+                    turnorder = 0;
+                    combatend = false;
                 }
                 else if (uinpturn == "4")
                 {
@@ -208,6 +185,7 @@ public class Combat
                     {
                         Console.WriteLine("You have Escaped!");
                         combatend = true;
+                        escapecheck = 1;
                         continue;
                     }
                     else
@@ -216,6 +194,7 @@ public class Combat
                         Thread.Sleep(1000);
                         initiativebonus = initiativebonus - 10;
                         combatend = false;
+                        escapecheck = 0;
                         turnorder = turnorder + 1;
                         continue;
                     }
@@ -228,8 +207,8 @@ public class Combat
                 Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
                 Console.WriteLine($"{enemy} Has the turn!");
                 Thread.Sleep(1000);
-                int enact = combatrandomiser.Next(3);
-                if (enact == 1)
+                int enact = combatrandomiser.Next(100);
+                if (enact < 33)
                 {
                     int enhit = combatrandomiser.Next(20);
                     if (enhit > CharACMain)
@@ -264,7 +243,7 @@ public class Combat
 
 
                 }
-                else if (enact == 2)
+                else if (enact > 33 && enact < 90)
                 {
                     Console.WriteLine($"{enemy} defends itself! Its AC is raised by 1");
                     Thread.Sleep(1000);
@@ -272,10 +251,28 @@ public class Combat
                     turnorder = 0;
                     combatend = false;
                 }
+                else if (enact > 91)
+                {
+                    double percent = 25;
+                    double percentage = Enemylist.Enemlist[enemyid].EnemyHealth * percent / 100;
+                    int healed = Convert.ToInt32(percentage);
+                    TempEnHp += healed;
+                    Console.WriteLine($"{enemy} heals itself with some kind of magic!");
+                    Console.WriteLine($"It healed {healed} HP! Now it has {TempEnHp} HP");
+                    combatend = false;
+                    turnorder = 0;
+                    continue;
+                }
 
             }
 
         } while (!combatend);
+        CharacterList.Charlist[0].HP = TempChrHp;
+        if (escapecheck == 0)
+        {
+            combatend = true;
+        }
+        else{ combatend = false; }
 
         return combatend;
 
@@ -318,10 +315,12 @@ public class Enemy
 
     public static void Enemys()
     {
-        Enemy rat = new Enemy("Rat",9, 30, 3, 10, 0); // id 0
+        Enemy rat = new Enemy("Rat", 9, 30, 3, 10, 0); // id 0
         Enemylist.Enemlist.Add(rat);
-        Enemy wolf = new Enemy("Wolf",15, 60, 5, 12, 1); // id 1
+        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12, 1); // id 1
         Enemylist.Enemlist.Add(wolf);
+        Enemy wolfpack = new Enemy("Wolfpack", 30, 100,40, 10, 2); //id 2
+        Enemylist.Enemlist.Add(wolfpack);
 
 
     }

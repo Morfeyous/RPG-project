@@ -71,7 +71,7 @@ public class Character
     }
     public string PrintCharInfo()
     {
-        return $"Name: {Name}\n Surname: {Surname}\n Age: {Age}\n HP: {HP}\n Damage per Atack: {Damage}";
+        return $"Name: {Name}\n Surname: {Surname}\n Age: {Age}\n HP: {HP}\n Damage per Atack: {Damage}\n AC: {AC}\n Initiative +{Initiative}";
     }
 
 

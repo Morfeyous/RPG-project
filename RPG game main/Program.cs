@@ -5,6 +5,8 @@ namespace RPG;
 
 class Game
 {
+    public static Money herogold = new Money(0);
+    
     public List<Character> charinfo = new List<Character>();
     public List<Enemy> enemyinfo = new List<Enemy>();
 
@@ -42,20 +44,59 @@ class Game
                         exitmenu1 = true;
                         continue;
                     }
-                    else { Console.WriteLine("Invalid Command!"); }
+                    else { Console.WriteLine("Invalid Command!"); Thread.Sleep(500); }
                 } while (!exitmenu1);
 
             }
             else if (uinpmain == "1")
             {
-                Cutsczene.StartingSzene();
-                string uinpdecis1 = Cutsczene.PlotM1();
-                string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
+                if (CharacterList.Charlist.Count == 0)
+                {
+                    Console.WriteLine("You need to create a character first!");
+                    Thread.Sleep(1500);
+                    exitgame = false;
+                    continue;
+                }
+                else
+                {
+                    bool plotloop1 = true;
+                    Cutsczene.StartingSzene();
+                    string uinpdecis1 = Cutsczene.PlotM1();
+                    string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
+                    string uactdecis2 = Cutsczene.PlotM3(uactfight1);
+                    do
+                    {
+                        if (uactdecis2 == "1")
+                        {
+                            string plotb2end = Cutsczene.PlotB2V1("1");
+                            if (plotb2end == "2")
+                            {
+                                uactdecis2 = plotb2end;
+                                plotloop1 = false;
+                                continue;
+                            }
+                            else if (plotb2end == "3")
+                            {
+                                uactdecis2 = plotb2end;
+                                plotloop1 = false;
+                                continue;
+                            }
+                        }
+                        else if (uactdecis2 == "2")
+                        {
+
+                        }
+                        else if (uactdecis2 == "3")
+                        {
+
+                        }
+                    } while (!plotloop1);
+                }
 
 
 
             }
-            else { Console.WriteLine("Invalid Command!"); }
+            else { Console.WriteLine("Invalid Command!");Thread.Sleep(500); }
         } while (!exitgame);
 
 

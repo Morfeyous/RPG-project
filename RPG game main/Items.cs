@@ -17,7 +17,7 @@ public class Items
         ItemHeal = itemheal;
     }
 
-    public int DmgAdd()
+    public int DmgAddItem()
     {
         int DamageAdd = DamageBonus;
         return DamageAdd;
@@ -56,3 +56,51 @@ class Itemlistsystem
         Itemlistsystem.Itemlist.Add(stick);
     }
 }
+public class weapon
+{
+    public string WpnName { get; set; }
+    public int DamageBonus { get; set; }
+
+    public weapon() { }
+
+    public weapon(string wpnid, int dmgbon)
+    {
+        WpnName = wpnid;
+        DamageBonus = dmgbon;
+    }
+    public int DmgAdd()
+    {
+        int DamageAdd = DamageBonus;
+        return DamageAdd;
+
+    }
+
+
+
+}
+class Weaponlist
+{
+    public static List<weapon> Weaponlists = new List<weapon>();
+
+
+    public static void Iteminfo()
+    {
+        Items stick = new Items("Stick", 5, 0, 0);
+        Itemlistsystem.Itemlist.Add(stick);
+    }
+}
+
+public class Money
+{
+    public int Gold { get; set; }
+
+    public Money() { }
+
+    public Money(int golda)
+    {
+        Gold = golda;
+    }
+
+
+}
+
