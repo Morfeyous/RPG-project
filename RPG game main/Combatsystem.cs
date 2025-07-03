@@ -19,7 +19,7 @@ public class Combat
         CharDmg = chrdmg;
     }
 
-    public bool Fight(string enemy, int initiativebonus, int initiativeEnemybonus, int enemyid)
+    public bool Fight(string enemy, int initiativebonus, int initiativeEnemybonus, int enemyid, int weaponbonus)
     {
         int escapecheck = 0;
         int TempChrdmg = CharDmg;
@@ -92,7 +92,7 @@ public class Combat
                 if (uinpturn == "1")
                 {
                     Console.WriteLine($"You atack the {enemy}! ");
-                    int hit = combatrandomiser.Next(21);
+                    int hit = combatrandomiser.Next(21) + weaponbonus;
                     if (hit >= Enemyac && hit != 20)
                     {
                         Console.WriteLine("You scored a hit!");
@@ -181,7 +181,7 @@ public class Combat
                     Console.WriteLine("You are trying to escape!");
                     Thread.Sleep(2000);
                     int escchance = combatrandomiser.Next(100) + initiativebonus;
-                    if (escchance < 50 + enemyinitiative)
+                    if (escchance > 50 + enemyinitiative)
                     {
                         Console.WriteLine("You have Escaped!");
                         combatend = true;
@@ -210,7 +210,7 @@ public class Combat
                 int enact = combatrandomiser.Next(100);
                 if (enact < 33)
                 {
-                    int enhit = combatrandomiser.Next(20);
+                    int enhit = combatrandomiser.Next(20) + Enemylist.Enemlist[enemyid].Enemyatackbonus;
                     if (enhit > CharACMain)
                     {
                         Console.WriteLine($"{enemy} atacks you!");
@@ -298,29 +298,34 @@ public class Enemy
     public int EnemyHealth { get; set; } 
     public  int EnemyINI { get; set; }
     public  int Enemyac { get; set; }
+    
+    public int Enemyatackbonus { get; set; }
 
     public int enemyid { get; set; }
 
     Enemy() { }
 
-    public Enemy(string EnName, int EnDmg, int EnHp, int EnIni, int EnAC, int enid) // todo add armor class(ac) and finish the combat system in the page gamestart!
+    public Enemy(string EnName, int EnDmg, int EnHp, int EnIni, int EnAC,int enbon, int enid)
     {
         EnemyType = EnName;
         EnemyDmg = EnDmg;
         EnemyHealth = EnHp;
         EnemyINI = EnIni;
         Enemyac = EnAC;
+        Enemyatackbonus = enbon;
         enemyid = enid;
     }
 
     public static void Enemys()
     {
-        Enemy rat = new Enemy("Rat", 9, 30, 3, 10, 0); // id 0
+        Enemy rat = new Enemy("Rat", 9, 30, 3, 10, 0, 0); // id 0
         Enemylist.Enemlist.Add(rat);
-        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12, 1); // id 1
+        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12, 1, 1); // id 1
         Enemylist.Enemlist.Add(wolf);
-        Enemy wolfpack = new Enemy("Wolfpack", 30, 100,40, 10, 2); //id 2
+        Enemy wolfpack = new Enemy("Wolfpack", 30, 200, 60, 3, 10, 2); //id 2
         Enemylist.Enemlist.Add(wolfpack);
+        Enemy Werewolf = new Enemy("Werewolf", 50, 400, 40, 13,5, 3); // id 3
+        Enemylist.Enemlist.Add(Werewolf);
 
 
     }

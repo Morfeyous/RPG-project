@@ -84,10 +84,13 @@ class Game
                         }
                         else if (uactdecis2 == "2")
                         {
+                            string decision1 = Cutsczene.PlotB1();//1 - mines // 2 - village
 
                         }
                         else if (uactdecis2 == "3")
                         {
+                            string decision1 = Cutsczene.PlotB2V2(); //DOUBLE CHECK THE DECISIONS NOT SURE IF THEY HAVE RIGHT OUTCOMES!!!!!***
+
 
                         }
                     } while (!plotloop1);

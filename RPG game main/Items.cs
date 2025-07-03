@@ -61,12 +61,15 @@ public class weapon
     public string WpnName { get; set; }
     public int DamageBonus { get; set; }
 
+    public int Hitbonus { get; set; }
+
     public weapon() { }
 
-    public weapon(string wpnid, int dmgbon)
+    public weapon(string wpnid, int dmgbon, int hitbon)
     {
         WpnName = wpnid;
         DamageBonus = dmgbon;
+        Hitbonus = hitbon;
     }
     public int DmgAdd()
     {
