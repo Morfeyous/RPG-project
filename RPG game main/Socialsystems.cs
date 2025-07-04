@@ -78,7 +78,7 @@ public class Trade
                 }
                 Game.herogold.Gold -= 8;
                 Items shield = new Items("Shield", 0, 3, 0);
-                Itemlistsystem.Itemlist.Add(shield);
+                Game.player.Inventory.Add(shield);
                 break;
             case "4":
                 Console.WriteLine("You bought a Health Stone for 5 gold.");
@@ -89,7 +89,7 @@ public class Trade
                 }
                 Game.herogold.Gold -= 5;
                 Items healthStone = new Items("Health Stone", 0, 0, 10);
-                Itemlistsystem.Itemlist.Add(healthStone);
+                Game.player.Inventory.Add(healthStone);
                 break;
             case "5":
                 Console.WriteLine("Exiting the buy menu.");

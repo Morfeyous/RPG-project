@@ -8,6 +8,7 @@ namespace RPG;
 class Game
 {
     public static Character player = null;
+    
     public static Money herogold = new Money(0);
     
     public List<Character> charinfo = new List<Character>();
@@ -15,6 +16,7 @@ class Game
 
     public static void Main(string[] args)
     {
+         
 
         bool exitgame = false;
         do
@@ -39,8 +41,8 @@ class Game
                     string uinpCreation = Console.ReadLine();
                     if (uinpCreation == "1")
                     {
-                        Character newChar = Character.Creation();
-                        Console.WriteLine(newChar.PrintCharInfo());
+                        player = Character.Creation();
+                        Console.WriteLine(player.PrintCharInfo());
                         exitmenu1 = false;
                     }
                     else if (uinpCreation == "2")
@@ -64,6 +66,7 @@ class Game
                 else
                 {
                     bool plotloop1 = true;
+                    bool plotloop2 = true;
                     Cutsczene.StartingSzene();
                     string uinpdecis1 = Cutsczene.PlotM1();
                     string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
@@ -88,22 +91,32 @@ class Game
                         else if (uactdecis2 == "3")
                         {
                             uactdecis3 = Cutsczene.PlotB1();//1 - mines // 2 - Village
+                            plotloop1 = true;
 
 
 
 
                         }
                     } while (!plotloop1);
-
-                    if (uactdecis3 == "1") // mines
+                    do
                     {
 
-                    }
-                    else if (uactdecis3 == "2") //village
-                    {
-                        Cutsczene.PlotB1V2("1");
 
-                    }
+
+                        if (uactdecis3 == "1") // mines
+                        {
+                            Cutsczene.PlotB1V1("1");
+                            uactdecis3 = "2"; 
+
+
+                        }
+                        else if (uactdecis3 == "2") //village
+                        {
+                            Cutsczene.PlotB1V2("1");
+                            uactdecis3 = "1";
+
+                        }
+                    } while (!plotloop2);
                 }
 
 

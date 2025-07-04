@@ -206,7 +206,7 @@ public class Combat
                 {
                     Console.WriteLine("You are trying to heal yourself!");
                     Thread.Sleep(1000);
-                    if (Itemlistsystem.Itemlist.Count == 0)
+                    if (Game.player.Inventory.Count == 0)
                     {
                         Console.WriteLine("You have no items to heal yourself with!");
                         Thread.Sleep(1000);
@@ -216,12 +216,11 @@ public class Combat
                     }
                     else
                     {
-                        Items healitem = Itemlistsystem.Itemlist.FirstOrDefault(i => i.ItemType == "Health Stone");
+                        Items healitem = Game.player.Inventory.Find(item => item.ItemHeal > 0);
                         if (healitem != null)
                         {
                             TempChrHp += healitem.ItemHeal;
                             Console.WriteLine($"You healed yourself for {healitem.ItemHeal} HP! Now you have {TempChrHp} HP!");
-                            Itemlistsystem.Itemlist.Remove(healitem);
                             Thread.Sleep(1000);
                             turnorder = turnorder + 1;
                             combatend = false;
@@ -360,8 +359,10 @@ public class Enemy
         Enemylist.Enemlist.Add(wolf);
         Enemy wolfpack = new Enemy("Wolfpack", 30, 200, 60, 3, 10, 2); //id 2
         Enemylist.Enemlist.Add(wolfpack);
-        Enemy Werewolf = new Enemy("Werewolf", 50, 400, 40, 13,5, 3); // id 3
+        Enemy Werewolf = new Enemy("Werewolf", 50, 400, 40, 13, 5, 3); // id 3
         Enemylist.Enemlist.Add(Werewolf);
+        Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
+        Enemylist.Enemlist.Add(goblin);
 
 
     }

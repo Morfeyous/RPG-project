@@ -8,21 +8,16 @@ public class Cutsczene
 {
     static public string StartingSzene()
     {
-        Console.WriteLine($"Loading...  ");
-        Thread.Sleep(4000);
-        Console.WriteLine("");
-        Console.WriteLine("You wake up on a glade in the middle of the dark forest");
-        Thread.Sleep(3000);
-        Console.WriteLine("It is unusualy quiet for a forest, you hear no signs of life around");
-        Thread.Sleep(4000);
-        Console.WriteLine("Only the sound of wind in the trees are disturbing the silence");
-        Thread.Sleep(3000);
-        Console.WriteLine("Otherwise...");
-        Thread.Sleep(2500);
+        Narrate("Loading...  ", 4000);
+        Narrate("", 1500);
+        Narrate("You wake up on a glade in the middle of the dark forest", 3000);
+        Narrate("It is unusualy quiet for a forest, you hear no signs of life around", 4000);
+        Narrate("Only the sound of wind in the trees are disturbing the silence", 3000);
+        Narrate("Otherwise...", 1000);
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("It would be Dead silent");
+        Narrate("Otherwise it would be Deadly Silent", 2000);
         Console.ResetColor();
-        Thread.Sleep(2000);
+        Narrate("", 2000);
         return "";
 
     }
@@ -34,14 +29,10 @@ public class Cutsczene
         int charbonus = 0;
         bool check1 = true;
         string chrActglade;
-        Console.WriteLine("You get up on you legs, your head still feels dizzy for some reason.");
-        Thread.Sleep(3500);
-        Console.WriteLine("You look around and see a narrow opening in the bushes that surround the glade, It looks like its the only way forward.");
-        Thread.Sleep(3500);
-        Console.WriteLine("What do you do?");
-        Thread.Sleep(1000);
-        Console.WriteLine("");
-        Thread.Sleep(1500);
+        Narrate("You get up on you legs, your head still feels dizzy for some reason.", 3500);
+        Narrate("You look around and see a narrow opening in the bushes that surround the glade, It looks like its the only way forward.", 3500);
+        Narrate("What do you do?", 1000);
+        Narrate("", 1500);
         do
         {
             Console.WriteLine("1. Follow the Path forward");
@@ -56,18 +47,12 @@ public class Cutsczene
             }
             else if (chrActglade == "3")
             {
-                Console.WriteLine("You decided to stay and listen to the forest itself.");
-                Thread.Sleep(1000);
-                Console.WriteLine(".");
-                Thread.Sleep(1000);
-                Console.WriteLine("..");
-                Thread.Sleep(1000);
-                Console.WriteLine("...");
-                Thread.Sleep(1000);
-                Console.WriteLine("You hear nothing except the sounds of wind somewhere above");
-                Thread.Sleep(2000);
-                Console.WriteLine("You feel that this forest it not so simple as it looks. You decide to stay sharp");
-                Thread.Sleep(4000);
+                Narrate("You decided to stay and listen to the forest itself.", 1000);
+                Narrate(".", 1000);
+                Narrate("..", 1000);
+                Narrate("...", 1000);
+                Narrate("You hear nothing except the sounds of wind somewhere above", 2000);
+                Narrate("You feel that this forest it not so simple as it looks. You decide to stay sharp", 3000);
                 Console.WriteLine("");
                 check1 = false;
                 if (chrbonuscheck3 == 0)
@@ -84,19 +69,13 @@ public class Cutsczene
             {
                 if (chrbonuscheck2 == 0)
                 {
-                    Console.WriteLine("You decided to look for something useful");
-                    Thread.Sleep(1000);
-                    Console.WriteLine(".");
-                    Thread.Sleep(1000);
-                    Console.WriteLine("..");
-                    Thread.Sleep(1000);
-                    Console.WriteLine("...");
-                    Thread.Sleep(1000);
-                    Console.WriteLine("You have found a stick. ");
-                    Thread.Sleep(2000);
-                    Console.WriteLine("Its heavy and pretty strong so you decide to take it");
-                    Console.WriteLine("");
-                    Thread.Sleep(1500);
+                    Narrate("You decided to look for something useful", 1000);
+                    Narrate(".", 1000);
+                    Narrate("..", 1000);
+                    Narrate("...", 1000);
+                    Narrate("You have found a stick.", 2000);
+                    Narrate("Its heavy and pretty strong so you decide to take it", 2000);
+                    Narrate("", 1500);
                     check1 = false;
 
                     charbonus = charbonus + 2;
@@ -130,14 +109,10 @@ public class Cutsczene
             Random randomiser = new Random(0);
             int escapechance = randomiser.Next(101);
             bool fight1over = false;
-            Console.WriteLine("When going forward you excerscized caution wielding your stick");
-            Thread.Sleep(3000);
-            Console.WriteLine("Because you were cautious you spotted a rat that hid in the grass.");
-            Thread.Sleep(3000);
-            Console.WriteLine("The rat has red glowing eyes and she is prepared for an attack");
-            Thread.Sleep(3000);
-            Console.WriteLine("Because you noticed her in time you have a chance to escape!");
-            Thread.Sleep(2000);
+            Narrate("When going forward you excerscized caution wielding your stick", 3000);
+            Narrate("Because you were cautious you spotted a rat that hid in the grass.", 3000);
+            Narrate("The rat has red glowing eyes and she is prepared for an attack", 3000);
+            Narrate("Because you noticed her in time you have a chance to escape!", 2000);
             do
             {
                 Console.WriteLine("What will you do?");
@@ -202,12 +177,9 @@ public class Cutsczene
             Random randomiser = new Random(0);
             int escapechance = randomiser.Next(101);
             bool fight1over = false;
-            Console.WriteLine("You were going forward wielding your stick");
-            Thread.Sleep(3000);
-            Console.WriteLine("In the grass something moved and you notice a rat");
-            Thread.Sleep(3000);
-            Console.WriteLine("The rat has red glowing eyes and she is prepared for an attack");
-            Thread.Sleep(3000);
+            Narrate("You were going forward wielding your stick", 3000);
+            Narrate("In the grass something moved and you notice a rat", 3000);
+            Narrate("The rat has red glowing eyes and she is prepared for an attack", 3000);
             do
             {
                 Console.WriteLine("What will you do?");
@@ -271,14 +243,10 @@ public class Cutsczene
             Random randomiser = new Random(0);
             int escapechance = randomiser.Next(101);
             bool fight1over = false;
-            Console.WriteLine("When going forward you excerscized caution");
-            Thread.Sleep(3000);
-            Console.WriteLine("Because you were cautious you spotted a rat that hid in the grass.");
-            Thread.Sleep(3000);
-            Console.WriteLine("The rat has red glowing eyes and she is prepared for an attack");
-            Thread.Sleep(3000);
-            Console.WriteLine("Because you noticed her in time you have a chance to escape!");
-            Thread.Sleep(2000);
+            Narrate("When going forward you excerscized caution wielding your stick", 3000);
+            Narrate("Because you were cautious you spotted a rat that hid in the grass.", 3000);
+            Narrate("The rat has red glowing eyes and she is prepared for an attack", 3000);
+            Narrate("Because you noticed her in time you have a chance to escape!", 2000);
             do
             {
                 Console.WriteLine("What will you do?");
@@ -341,14 +309,10 @@ public class Cutsczene
             Random randomiser = new Random(0);
             int escapechance = randomiser.Next(101);
             bool fight1over = false;
-            Console.WriteLine("You were going forward carefully pushing branches away");
-            Thread.Sleep(3000);
-            Console.WriteLine("Something moved in the grass beneath you");
-            Thread.Sleep(3000);
-            Console.WriteLine("It was a rat that was about to atack!");
-            Thread.Sleep(3000);
-            Console.WriteLine("Because you noticed it too late you have almost no time to escape");
-            Thread.Sleep(2000);
+            Narrate("You were going forward carefully pushing branches away", 3000);
+            Narrate("Something moved in the grass beneath you", 3000);
+            Narrate("It was a rat that was about to atack!", 3000);
+            Narrate("Because you noticed it too late you have almost no time to escape", 3000);
             do
             {
                 Console.WriteLine("What will you do?");
@@ -509,22 +473,14 @@ public class Cutsczene
         int escapetry = 0;
         string plotb2end = "0";
         bool fight2over = false;
-        Console.WriteLine("You decide to strand in the forest in case there is an ambush on the road");
-        Thread.Sleep(4000);
-        Console.WriteLine("You go deeper and deeper into the darkness");
-        Thread.Sleep(3000);
-        Console.WriteLine("You hear strange sounds somewhere deep in the forest");
-        Thread.Sleep(3000);
-        Console.WriteLine("Suddenly the bushes in front of you start to shake");
-        Thread.Sleep(3000);
-        Console.WriteLine("A gray wolf walks out of them and looks right at you");
-        Thread.Sleep(3000);
-        Console.WriteLine("There is some distance between you but you are certain that running away from this one is not an option");
-        Thread.Sleep(5000);
-        Console.WriteLine("The wolf howls and you hear distant answer of his brothers.");
-        Thread.Sleep(3000);
-        Console.WriteLine("What will you do?");
-        Thread.Sleep(1000);
+        Narrate("You decide to strand in the forest in case there is an ambush on the road", 4000);
+        Narrate("You go deeper and deeper into the darkness", 3000);
+        Narrate("You hear strange sounds somewhere deep in the forest", 3000);
+        Narrate("Suddenly the bushes in front of you start to shake", 3000);
+        Narrate("A gray wolf walks out of them and looks right at you", 3000);
+        Narrate("There is some distance between you but you are certain that running away from this one is not an option", 5000);
+        Narrate("The wolf howls and you hear distant answer of his brothers.", 3000);
+        Narrate("What will you do?", 3000);
         Console.WriteLine("");
         do
         {
@@ -612,17 +568,13 @@ public class Cutsczene
         Enemy wolfpack = new Enemy("Wolfpack", 30, 200, 60, 7, 3, 2); //id 2
         Enemylist.Enemlist.Add(wolfpack);
         string plotB2V1end = "0";
-        Console.WriteLine("After defeating the wolf you hear howling that is coming towards you from the deep forest ");
-        Thread.Sleep(4000);
-        Console.WriteLine("You still have a chance to try and escape the szene until they found you");
-        Thread.Sleep(4000);
-        Console.WriteLine("What do you do?");
-        Thread.Sleep(2500);
-        Console.WriteLine("");
-        Console.WriteLine("1. Run back to the road");
-        Console.WriteLine("2. Stay and fight");
-        Console.WriteLine("3. Run in another direction deeper into the forest");
-        Console.WriteLine("");
+        Narrate("After defeating the wolf you hear howling that is coming towards you from the deep forest", 3000);
+        Narrate("You still have a chance to try and escape the scene until they found you", 4000);
+        Narrate("What do you do?", 1500);
+        Narrate("", 500);
+        Narrate("1. Run back to the road", 0);
+        Narrate("2. Stay and fight", 0);
+        Narrate("3. Run in another direction deeper into the forest", 0);
         string uinpdesiforest2 = Console.ReadLine();
         if (uinpdesiforest2 == "1")
         {
@@ -630,16 +582,11 @@ public class Cutsczene
         }
         else if (uinpdesiforest2 == "2")
         {
-            Console.WriteLine("You decided to stay and face them!");
-            Thread.Sleep(3500);
-            Console.WriteLine("A wolfpack emerges from the darkness");
-            Thread.Sleep(3500);
-            Console.WriteLine("There is a lot of them and you feel shivers crawling down your spine");
-            Thread.Sleep(3500);
-            Console.WriteLine("You notice that you are surrounded and there is no way to escape");
-            Thread.Sleep(3500);
-            Console.WriteLine("Good Luck...");
-            Thread.Sleep(2500);
+            Narrate("You decide to stay and fight", 3000);
+            Narrate("A wolfpack emerges from the darkness", 3500);
+            Narrate("There is a lot of them and you feel shivers crawling down your spine", 3500);
+            Narrate("You notice that you are surrounded and there is no way to escape", 3500);
+            Narrate("Good Luck...", 2500);
             int CharHP = Game.player.HP;
             var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
             int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
@@ -649,15 +596,11 @@ public class Cutsczene
             string enemytype = Enemylist.Enemlist[2].EnemyType;
             Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
             bool combat2 = fight3.Fight(enemytype, 0, enemyini, 2, Weaponlist.Weaponlists[0].Hitbonus);
-            Thread.Sleep(3000);
-            Console.WriteLine("You have managed to kill them all");
-            Thread.Sleep(2000);
-            Console.WriteLine("You recieved 150 gold");
+            Narrate("You have managed to kill them all", 3000);
+            Narrate("You recieved 150 gold", 2000);
             Game.herogold.Gold += 150;
-            Console.WriteLine("You decide to go back to the road. Who knows who else can hide in this forest");
-            Thread.Sleep(3000);
-            Console.WriteLine("Or what else...");
-            Thread.Sleep(2000);
+            Narrate("You decide to go back to the road. Who knows who else can hide in this forest", 3000);
+            Narrate("Or what else...", 2000);
             plotB2V1end = "3";
 
 
@@ -676,40 +619,24 @@ public class Cutsczene
         Enemylist.Enemlist.Add(Werewolf);
         string miracle = "0";
 
-        Console.WriteLine("You were running deeper into the forest hoping they wont catch up on you");
-        Thread.Sleep(3000);
-        Console.WriteLine("But you notice that the wolfpack stoped and didnt folow you further");
-        Thread.Sleep(3000);
-        Console.WriteLine("It looks like you was able to outran them!");
-        Thread.Sleep(3000);
-        Console.WriteLine("You felt tired so you stoped by a tree to catch your breath");
-        Thread.Sleep(3000);
-        Console.WriteLine("But when you did so...");
-        Thread.Sleep(3000);
-        Console.WriteLine("You felt that something is watching you ");
-        Thread.Sleep(3000);
-        Console.WriteLine("You look around and first you didnt see anything except dark silhouettes of trees around");
-        Thread.Sleep(3000);
-        Console.WriteLine("But then it suddenly struck you");
-        Thread.Sleep(3000);
-        Console.WriteLine("It was there. One of the tree silhouettes was looking odd");
-        Thread.Sleep(3000);
-        Console.WriteLine("You focus your eyes trying to identify it");
-        Thread.Sleep(3000);
-        Console.WriteLine("A powerful gust of the wind shakes the treetops covering the sun");
-        Thread.Sleep(3000);
-        Console.WriteLine("And for a moment a glimmer of light gives you just enogh time");
-        Thread.Sleep(3000);
-        Console.WriteLine("To understand that it is not a tree...");
-        Thread.Sleep(1500);
-        Console.WriteLine(".");
-        Thread.Sleep(1500);
-        Console.WriteLine("..");
-        Thread.Sleep(1500);
-        Console.WriteLine("...");
+        Narrate("You run deeper into the forest trying to escape the wolfpack", 3000);
+        Narrate("But you notice that the wolfpack stopped and didn't follow you further", 3000);
+        Narrate("It looks like you were able to outrun them!", 3000);
+        Narrate("You felt tired so you stopped by a tree to catch your breath", 3000);
+        Narrate("But when you did so...", 3000);
+        Narrate("You felt that something is watching you", 3000);
+        Narrate("You look around and first you didn't see anything except dark silhouettes of trees around", 3000);
+        Narrate("But then it suddenly struck you", 3000);
+        Narrate("It was there. One of the tree silhouettes was looking odd", 3000);
+        Narrate("You focus your eyes trying to identify it", 3000);
+        Narrate("A powerful gust of the wind shakes the treetops covering the sun", 3000);
+        Narrate("And for a moment a glimmer of light gives you just enough time", 3000);
+        Narrate("To understand that it is not a tree...", 3000);
+        Narrate(".", 1500);
+        Narrate("..", 1500);
+        Narrate("...", 1500);
         Thread.Sleep(2200);
-        Console.WriteLine("It is a Werewolf.");
-        Thread.Sleep(3000);
+        Narrate("It is a Werewolf.", 3000);
         int CharHP = Game.player.HP;
         var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
         int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
@@ -741,24 +668,59 @@ public class Cutsczene
     public static string PlotB1V1(string firstenc) //Mines
     {
         if (firstenc == "1")
-        Console.WriteLine("You follow the road that leads you through the forest");
-        Thread.Sleep(2500);
-        Console.WriteLine("After some time you encounter a small railroad with empty minecarts");
-        Thread.Sleep(2500);
-        Console.WriteLine("Folowing the railroad you come to a stone hill with a mine entrance in the middle where the road leads");
-        Thread.Sleep(2500);
-        Console.WriteLine("Around the entrance you see piles of stone and broken mining equipment.");
-        Thread.Sleep(2500);
-        Console.WriteLine("You notice an old small pickaxe that can be used as a weapon");
-        Thread.Sleep(2500);
-        Console.WriteLine("Will you take it?");
-        Thread.Sleep(2500);
+            Narrate("You follow the road that leads you through the forest", 2500);
+        Narrate("After some time you encounter a small railroad with empty minecarts", 2500);
+        Narrate("Folowing the railroad you come to a stone hill with a mine entrance in the middle where the road leads", 2500);
+        Narrate("Around the entrance you see piles of stone and broken mining equipment.", 2500);
+        Narrate("You notice an old small pickaxe that can be used as a weapon", 2500);
+        Narrate("Will you take it?", 2500);
         Console.WriteLine("");
         Console.WriteLine("1. Take");
         Console.WriteLine("2. Leave it");
         string uiactpickaxe = Console.ReadLine();
+        if (uiactpickaxe == "1")
+        {
+            Console.WriteLine("You take the pickaxe and put it in your inventory");
+            Thread.Sleep(2500);
+            weapon smallpickaxe = new weapon("Small Pickaxe", 8, 3);
+            Weaponlist.Weaponlists.Add(smallpickaxe);
+            Console.WriteLine("You can now use it as a weapon");
+            Thread.Sleep(2500);
+        }
+        else if (uiactpickaxe == "2")
+        {
+            Console.WriteLine("You leave the pickaxe where it is");
+            Thread.Sleep(2500);
+        }
+        else
+        {
+            Console.WriteLine("Invalid Input");
+        }
+        bool exitmine = false;
+        Narrate("You approach the mine entrance", 2500);
+        Narrate("You need to decide if you want to go into the mine or not", 2500);
+        Narrate("You can always come back later", 2500);
 
-        
+        do
+        {
+            Console.WriteLine("");
+            Console.WriteLine("1. Enter the mine");
+            Console.WriteLine("2. Go back to the crossroad");
+            string? uinpdecidemine = Console.ReadLine();
+            if (uinpdecidemine == "1")
+            {
+                Narrate("You enter the mine", 2500);
+
+            }
+            else if (uinpdecidemine == "2")
+            {
+                Narrate("You go back to the crossroad", 2500);
+            }
+            else
+            {
+                Narrate("Invalid Input", 2500);
+            }
+        } while (!exitmine);
 
         return "";
     }
@@ -893,6 +855,92 @@ public class Cutsczene
                 Console.WriteLine("Invalid Input");
             }
         } while (!exitshop);
+    }
+
+    public static void Narrate(string text, int intervall)
+    {
+        Console.WriteLine(text);
+        Thread.Sleep(intervall);
+    }
+
+    public static string PlotB1V1M1(string firstenc) //Mines
+    {
+        Random exprandomiser = new Random(0);
+        int exprand = exprandomiser.Next(101);
+        bool exitmine = false;
+        if (firstenc == "1")
+        {
+            Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
+            Enemylist.Enemlist.Add(goblin);
+            Narrate("You enter the mine and see that the path forward is lit by glowing crystals embedded in the walls.", 2500);
+            Narrate("Its cold and quiet and it seems like there is no one inside", 2500);
+            Narrate("You can hear your own footsteps echoing in the distance", 2500);
+            Narrate("As you go forward you hear strange noises coming from deeper within the mine", 2500);
+
+        }
+        do
+        {
+            Narrate("You can go deeper into the mine or leave it", 2500);
+            Narrate("What do you do?", 2500);
+            Narrate("1. Explore the mine", 0);
+            Narrate("2. Leave the mine", 0);
+            string uinpdecismines = Console.ReadLine();
+            if (uinpdecismines == "1")
+            {
+                Narrate("You decide to explore the mine", 2500);
+                if (exprand < 10)
+                {
+                    Narrate("You find a small chest with 50 gold inside", 2500);
+                    Game.herogold.Gold += 50;
+                    Narrate("You can continue exploring or leave the mine", 2500);
+                }
+                else if (exprand < 30)
+                {
+                    Narrate("You encounter a goblin!", 2500);
+                    Narrate("The goblin attacks you!", 2500);
+                    int CharHP = Game.player.HP;
+                    var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Small Pickaxe");
+                    int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
+                    int EnemyDmg = Enemylist.Enemlist[4].EnemyDmg;
+                    int EnemyHP = Enemylist.Enemlist[4].EnemyHealth;
+                    int enemyini = Enemylist.Enemlist[4].EnemyINI;
+                    string enemytype = Enemylist.Enemlist[4].EnemyType;
+                    Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 2, Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick").Hitbonus);
+                    if (combat2 == true)
+                    {
+                        Narrate("You defeated the goblin!", 2500);
+                        Narrate("You can continue exploring or leave the mine", 2500);
+                        Game.herogold.Gold += 20; // Reward for defeating goblin
+                    }
+                    else
+                    {
+                        Narrate("You can leave the mine now", 2500);
+                        exitmine = true;
+                    }
+                }
+                else if (exprand < 60)
+                {
+                    Narrate("You find a small chest with 10 gold inside", 2500);
+                    Game.herogold.Gold += 10;
+                    Narrate("You can continue exploring or leave the mine", 2500);
+                }
+                else
+                {
+                    Narrate("You find nothing but dust and silence", 2500);
+                }
+            }
+            else if (uinpdecismines == "2")
+            {
+                Narrate("You decide to leave the mine", 2500);
+                exitmine = true;
+            }
+            else
+            {
+                Narrate("Invalid Input", 2500);
+            }
+        } while (!exitmine);
+        return "0";
     }
     
 }

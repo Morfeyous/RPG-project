@@ -37,6 +37,7 @@ public class Items
     {
         string itemname = ItemType;
         return itemname;
+        
     }
 
 
@@ -45,7 +46,7 @@ public class Items
 
 }
 
-class Itemlistsystem
+/*class Itemlistsystem
 {
     public static List<Items> Itemlist = new List<Items>();
 
@@ -56,6 +57,7 @@ class Itemlistsystem
         Itemlistsystem.Itemlist.Add(stick);
     }
 }
+*/
 public class weapon
 {
     public string WpnName { get; set; }
@@ -77,6 +79,7 @@ public class weapon
         return DamageAdd;
 
     }
+    
 
 
 
@@ -89,7 +92,7 @@ class Weaponlist
     public static void Iteminfo()
     {
         Items stick = new Items("Stick", 5, 0, 0);
-        Itemlistsystem.Itemlist.Add(stick);
+        
     }
 }
 
