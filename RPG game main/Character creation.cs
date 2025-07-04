@@ -11,6 +11,9 @@ public class Character
 
     public int AC { get; set; }
     public int Initiative { get; set; }
+
+    public List<Items> Inventory { get; set; } = new List<Items>(); // Weapon and inventory lists
+    public List<weapon> Weapons { get; set; } = new List<weapon>();
     
 
     public Character() { }
@@ -28,6 +31,8 @@ public class Character
 
     static public Character Creation()
     {
+        
+        Character char1 = null;
         bool exitclasscreation = false;
         Console.WriteLine("Chose the name of the character!");
         string Nameinp = Console.ReadLine();
@@ -38,7 +43,6 @@ public class Character
         do
         {
 
-            
             Console.WriteLine("Chose your class!");
             Console.WriteLine("");
             Console.WriteLine("1. Warrior");
@@ -47,26 +51,25 @@ public class Character
             string userchar = Console.ReadLine();
             if (userchar == "1")
             {
-                Character char0 = new Character(Nameinp, Surnameinp, Ageinp, 100, 15, 13, 1);
-                CharacterList.Charlist.Add(char0);
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 100, 15, 13, 1);
+                //TODO: Vielleicht keine Liste sondern ein Character
+                //Diesen Character dann überall verwenden
                 exitclasscreation = true;
             }
             else if (userchar == "2")
             {
-                Character char1 = new Character(Nameinp, Surnameinp, Ageinp, 150, 5, 16, -5);
-                CharacterList.Charlist.Add(char1);
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 150, 5, 16, -5);
                 exitclasscreation = true;
             }
             else if (userchar == "3")
             {
-                Character char2 = new Character(Nameinp, Surnameinp, Ageinp, 50, 25, 11, 10);
-                CharacterList.Charlist.Add(char2);
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 50, 25, 11, 10);
                 exitclasscreation = true;
             }
             else { Console.WriteLine("Invalid Input!"); }
         } while (!exitclasscreation);
 
-            return CharacterList.Charlist[0];
+        return char1;
         
     }
     public string PrintCharInfo()
@@ -77,8 +80,4 @@ public class Character
 
 }
 
-public static class CharacterList
-{
-    public static List<Character> Charlist = new List<Character>();
-}
 

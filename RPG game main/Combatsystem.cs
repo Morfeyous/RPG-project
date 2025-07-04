@@ -28,13 +28,15 @@ public class Combat
         int TempEnHp = EnemyHP;
         int Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
         int ACbonus = 0;
-        int CharAC1 = CharacterList.Charlist[0].AC + ACbonus;
+        int CharAC1 = Game.player.AC + ACbonus; //TODO: Later add weapon bonus
         bool combatend = false;
         int turnorder = 0;
         Random combatrandomiser = new Random();
         int turnchance = combatrandomiser.Next(100);
+        //TODO: Vielleicht seperate static funktion ""
         Console.WriteLine("Activating combat mode!");
         Thread.Sleep(1500);
+        //
         Console.WriteLine("Rolling for Initiative.");
         Thread.Sleep(3000);
         int playerinitiative = Initiative(initiativebonus);
@@ -75,18 +77,19 @@ public class Combat
         }
         do
         {
-            int CharACMain = CharacterList.Charlist[0].AC + ACbonus;
+            int CharACMain = Game.player.AC + ACbonus; //TODO: Later add weapon bonus
             if (turnorder == 0)
             {
                 Console.WriteLine("It is your turn!");
                 Thread.Sleep(1000);
                 ACbonus = 0;
-                CharACMain = CharacterList.Charlist[0].AC;
+                CharACMain = Game.player.AC;
                 Console.WriteLine("What will you do in your turn?");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Defend");
                 Console.WriteLine("3. Stats");  //TODO add items in future. Now focus on combat system//
                 Console.WriteLine("4. Escape");
+                Console.WriteLine("5. Heal");
                 Console.WriteLine("");
                 string? uinpturn = Console.ReadLine();
                 if (uinpturn == "1")
@@ -157,7 +160,7 @@ public class Combat
                     Thread.Sleep(500);
                     Console.WriteLine("You decided to defend yourself!");
                     ACbonus = 2;
-                    CharACMain = CharacterList.Charlist[0].AC + ACbonus;
+                    CharACMain = Game.player.AC + ACbonus;
                     turnorder = turnorder + 1;
                     combatend = false;
                     Thread.Sleep(2000);
@@ -165,7 +168,7 @@ public class Combat
                 }
                 else if (uinpturn == "3")
                 {
-                    string charinfo = CharacterList.Charlist[0].PrintCharInfo();
+                    string charinfo = Game.player.PrintCharInfo();
                     Console.WriteLine(charinfo);
                     Console.WriteLine($"Gold: {Game.herogold.Gold}");
                     foreach (weapon c in Weaponlist.Weaponlists)
@@ -198,8 +201,41 @@ public class Combat
                         turnorder = turnorder + 1;
                         continue;
                     }
-
-
+                }
+                else if (uinpturn == "5")
+                {
+                    Console.WriteLine("You are trying to heal yourself!");
+                    Thread.Sleep(1000);
+                    if (Itemlistsystem.Itemlist.Count == 0)
+                    {
+                        Console.WriteLine("You have no items to heal yourself with!");
+                        Thread.Sleep(1000);
+                        turnorder = 0;
+                        combatend = false;
+                        continue;
+                    }
+                    else
+                    {
+                        Items healitem = Itemlistsystem.Itemlist.FirstOrDefault(i => i.ItemType == "Health Stone");
+                        if (healitem != null)
+                        {
+                            TempChrHp += healitem.ItemHeal;
+                            Console.WriteLine($"You healed yourself for {healitem.ItemHeal} HP! Now you have {TempChrHp} HP!");
+                            Itemlistsystem.Itemlist.Remove(healitem);
+                            Thread.Sleep(1000);
+                            turnorder = turnorder + 1;
+                            combatend = false;
+                            continue;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You have no items to heal yourself with!");
+                            Thread.Sleep(1000);
+                            turnorder = 0;
+                            combatend = false;
+                            continue;
+                        }
+                    }
                 }
             }
             else if (turnorder == 1)
@@ -267,7 +303,7 @@ public class Combat
             }
 
         } while (!combatend);
-        CharacterList.Charlist[0].HP = TempChrHp;
+        Game.player.HP = TempChrHp;
         if (escapecheck == 0)
         {
             combatend = true;

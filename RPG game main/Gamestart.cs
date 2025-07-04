@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace RPG;
@@ -70,7 +72,7 @@ public class Cutsczene
                 check1 = false;
                 if (chrbonuscheck3 == 0)
                 {
-                    CharacterList.Charlist[0].Initiative = CharacterList.Charlist[0].Initiative + 4;
+                    Game.player.Initiative = Game.player.Initiative + 1;
                     charbonus = charbonus + 1;
                     chrbonuscheck3 = chrbonuscheck3 + 1;
                 }
@@ -113,9 +115,9 @@ public class Cutsczene
 
     static public string PlotM2(string bonus)
     {
-        Enemy rat = new Enemy("Rat", 9, 30, 3, 10,0, 0);
+        Enemy rat = new Enemy("Rat", 9, 30, 3, 10, 0, 0);
         Enemylist.Enemlist.Add(rat);
-        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12,1, 1);
+        Enemy wolf = new Enemy("Wolf", 15, 60, 5, 12, 1, 1);
         Enemylist.Enemlist.Add(wolf);
         Dictionary<string, Enemy> Enemys = Enemylist.Enemlist.ToDictionary(c => c.EnemyType);
         wolf = Enemys["Wolf"];
@@ -146,8 +148,8 @@ public class Cutsczene
                 if (uinpfight1 == "1")
                 {
 
-                    int CharHP = CharacterList.Charlist[0].HP;
-                    int CharDmg = CharacterList.Charlist[0].Damage + Weaponlist.Weaponlists[0].DmgAdd(); //TODO later: add class weapons and auto add properties
+                    int CharHP = Game.player.HP;
+                    int CharDmg = Game.player.Damage + Weaponlist.Weaponlists[0].DmgAdd(); //TODO later: add class weapons and auto add properties
                     int EnemyHP = rat.EnemyHealth;
                     int EnemyDmg = rat.EnemyDmg; //added that list properties are called from a dictionary instad of calling them via id
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);//use later: weapons, characters etc
@@ -216,8 +218,8 @@ public class Cutsczene
                 if (uinpfight1 == "1")
                 {
 
-                    int CharHP = CharacterList.Charlist[0].HP;
-                    int CharDmg = CharacterList.Charlist[0].Damage + 5; //TODO later: add class weapons and auto add properties
+                    int CharHP = Game.player.HP;
+                    int CharDmg = Game.player.Damage + 5; //TODO later: add class weapons and auto add properties
                     int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
@@ -287,8 +289,8 @@ public class Cutsczene
                 if (uinpfight1 == "1")
                 {
 
-                    int CharHP = CharacterList.Charlist[0].HP;
-                    int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
+                    int CharHP = Game.player.HP;
+                    int CharDmg = Game.player.Damage; //TODO later: add class weapons and auto add properties
                     int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
@@ -357,8 +359,8 @@ public class Cutsczene
                 if (uinpfight1 == "1")
                 {
 
-                    int CharHP = CharacterList.Charlist[0].HP;
-                    int CharDmg = CharacterList.Charlist[0].Damage; //TODO later: add class weapons and auto add properties
+                    int CharHP = Game.player.HP;
+                    int CharDmg = Game.player.Damage; //TODO later: add class weapons and auto add properties
                     int EnemyHP = Enemylist.Enemlist[0].EnemyHealth;
                     int EnemyDmg = Enemylist.Enemlist[0].EnemyDmg;
                     Combat fight1 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
@@ -483,7 +485,7 @@ public class Cutsczene
             string uinpcrossroad2 = Console.ReadLine();
             if (uinpcrossroad2 == "1")
             {
-                uinpdesiccross = uinpdesiccross + 1; 
+                uinpdesiccross = uinpdesiccross + 1;
                 crossroadend2 = true;
                 continue;
             }
@@ -536,16 +538,15 @@ public class Cutsczene
             string uinpdecisforest = Console.ReadLine();
             if (uinpdecisforest == "1")
             {
-                int CharHP = CharacterList.Charlist[0].HP;
+                int CharHP = Game.player.HP;
                 var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
-                int CharDmg = CharacterList.Charlist[0].Damage + (stick?.DamageBonus ?? 0);
+                int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
                 int EnemyDmg = Enemylist.Enemlist[1].EnemyDmg;
                 int EnemyHP = Enemylist.Enemlist[1].EnemyHealth;
                 int enemyini = Enemylist.Enemlist[1].EnemyINI;
                 string enemytype = Enemylist.Enemlist[1].EnemyType;
                 Combat fight2 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
                 bool combat2 = fight2.Fight(enemytype, 0, enemyini, 1, 0);
-                fight2over = combat2;
                 fight2over = true;
                 Console.WriteLine("You recieved 10 gold"); // todo add escape branch for plot in this battle
                 Game.herogold.Gold += 10;
@@ -588,7 +589,7 @@ public class Cutsczene
             }
             else if (uinpdecisforest == "4")
             {
-                string charinfo = CharacterList.Charlist[0].PrintCharInfo();
+                string charinfo = Game.player.PrintCharInfo();
                 Console.WriteLine(charinfo);
                 Console.WriteLine($"Gold: {Game.herogold.Gold}");
                 foreach (weapon c in Weaponlist.Weaponlists)
@@ -608,7 +609,7 @@ public class Cutsczene
 
     public static string PlotB2V1(string plotb2end)
     {
-        Enemy wolfpack = new Enemy("Wolfpack", 30, 200, 60, 7,3, 2); //id 2
+        Enemy wolfpack = new Enemy("Wolfpack", 30, 200, 60, 7, 3, 2); //id 2
         Enemylist.Enemlist.Add(wolfpack);
         string plotB2V1end = "0";
         Console.WriteLine("After defeating the wolf you hear howling that is coming towards you from the deep forest ");
@@ -625,7 +626,7 @@ public class Cutsczene
         string uinpdesiforest2 = Console.ReadLine();
         if (uinpdesiforest2 == "1")
         {
-            plotB2V1end = "2";
+            plotB2V1end = "3";
         }
         else if (uinpdesiforest2 == "2")
         {
@@ -639,9 +640,9 @@ public class Cutsczene
             Thread.Sleep(3500);
             Console.WriteLine("Good Luck...");
             Thread.Sleep(2500);
-            int CharHP = CharacterList.Charlist[0].HP;
+            int CharHP = Game.player.HP;
             var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
-            int CharDmg = CharacterList.Charlist[0].Damage + (stick?.DamageBonus ?? 0);
+            int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
             int EnemyDmg = Enemylist.Enemlist[2].EnemyDmg;
             int EnemyHP = Enemylist.Enemlist[2].EnemyHealth;
             int enemyini = Enemylist.Enemlist[2].EnemyINI;
@@ -651,19 +652,19 @@ public class Cutsczene
             Thread.Sleep(3000);
             Console.WriteLine("You have managed to kill them all");
             Thread.Sleep(2000);
-            Console.WriteLine("You recieved 150 gold"); // todo add escape branch for plot in this battle
+            Console.WriteLine("You recieved 150 gold");
             Game.herogold.Gold += 150;
             Console.WriteLine("You decide to go back to the road. Who knows who else can hide in this forest");
             Thread.Sleep(3000);
             Console.WriteLine("Or what else...");
             Thread.Sleep(2000);
-            plotB2V1end = "1";
+            plotB2V1end = "3";
 
 
         }
         else if (uinpdesiforest2 == "3")
         {
-            plotB2V1end = "3";
+            plotB2V1end = "2";
 
         }
         return plotB2V1end;
@@ -709,9 +710,9 @@ public class Cutsczene
         Thread.Sleep(2200);
         Console.WriteLine("It is a Werewolf.");
         Thread.Sleep(3000);
-        int CharHP = CharacterList.Charlist[0].HP;
+        int CharHP = Game.player.HP;
         var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Stick");
-        int CharDmg = CharacterList.Charlist[0].Damage + (stick?.DamageBonus ?? 0);
+        int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
         int EnemyDmg = Enemylist.Enemlist[3].EnemyDmg;
         int EnemyHP = Enemylist.Enemlist[3].EnemyHealth;
         int enemyini = Enemylist.Enemlist[3].EnemyINI;
@@ -722,15 +723,176 @@ public class Cutsczene
         {
             Console.WriteLine("How? Just How? THIS ONE WAS MADE TO KILL YOU");
             Console.WriteLine(""); //Add impossible win bonus
+            Console.WriteLine("You won. I give up!");
+            Thread.Sleep(5000);
+            Environment.Exit(0);
         }
         else if (combat2 == false)
         {
             Console.WriteLine("You somewhow managed to escape. Frightened you run back to the road and find it by a miracle");
             Console.WriteLine("Werewolf doesnt follow you.");
-            miracle = "1";
+            miracle = "3";
 
         }
         return miracle;
 
     }
+
+    public static string PlotB1V1(string firstenc) //Mines
+    {
+        if (firstenc == "1")
+        Console.WriteLine("You follow the road that leads you through the forest");
+        Thread.Sleep(2500);
+        Console.WriteLine("After some time you encounter a small railroad with empty minecarts");
+        Thread.Sleep(2500);
+        Console.WriteLine("Folowing the railroad you come to a stone hill with a mine entrance in the middle where the road leads");
+        Thread.Sleep(2500);
+        Console.WriteLine("Around the entrance you see piles of stone and broken mining equipment.");
+        Thread.Sleep(2500);
+        Console.WriteLine("You notice an old small pickaxe that can be used as a weapon");
+        Thread.Sleep(2500);
+        Console.WriteLine("Will you take it?");
+        Thread.Sleep(2500);
+        Console.WriteLine("");
+        Console.WriteLine("1. Take");
+        Console.WriteLine("2. Leave it");
+        string uiactpickaxe = Console.ReadLine();
+
+        
+
+        return "";
+    }
+
+    public static string PlotB1V2(string firstenc) //Village
+    {
+        if (firstenc == "1")
+        {
+            Console.WriteLine("");
+            Thread.Sleep(1000);
+            Console.WriteLine("You decide to go to the village");
+            Thread.Sleep(2500);
+            Console.WriteLine("Seeing someone alive and not willing to kill you would be great");
+            Thread.Sleep(2500);
+            Console.WriteLine("You walk the path for some time and the forest start to fade away");
+            Thread.Sleep(2500);
+            Console.WriteLine("You can see a small village on the open field in the distance");
+            Thread.Sleep(2500);
+            Console.WriteLine("You notice mountains far away behind the village");
+            Thread.Sleep(2500);
+            Console.WriteLine("One of them looks different");
+            Thread.Sleep(2500);
+            Console.WriteLine("It is covered with unnaturaly blue clouds that storm with purple lightnings");
+            Thread.Sleep(2500);
+            Console.WriteLine("You cant hear them, but you feel the power the mountain radiates");
+            Thread.Sleep(2500);
+            Console.WriteLine("It scares you");
+            Thread.Sleep(2500);
+            Console.WriteLine("But you decide to go forward. You enter the village through the main road");
+            Thread.Sleep(2500);
+            Console.WriteLine("The guard post is empty on the village entrance");
+            Thread.Sleep(2500);
+            Console.WriteLine("You go towards the centre of the village and look around");
+            Thread.Sleep(2500);
+            Console.WriteLine("You notice people. They look at you with tired neutral eyes");
+            Thread.Sleep(2500);
+            Console.WriteLine("All of them are near their houses, some are busy with their housework");
+            Thread.Sleep(2500);
+            Console.WriteLine("And some just sit there and watch you");
+        }
+        bool villagexit = false;
+        string villageexitdecis = "0";
+        Thread.Sleep(2500);
+        Console.WriteLine("You reach the centre of the village");
+        Thread.Sleep(2500);
+        Console.WriteLine("You have options where to go next!");
+        Thread.Sleep(2500);
+        do
+        {
+            Console.WriteLine("");
+            Console.WriteLine("1. Shop ");
+            Console.WriteLine("2. Tavern \"Miners delight\"");
+            Console.WriteLine("3. Adventurers Guild");
+            Console.WriteLine("4. Check stats");
+            Console.WriteLine("5. Exit the village");
+            Thread.Sleep(1000);
+            Console.WriteLine("");
+            string uiactdecisvillage = Console.ReadLine();
+            if (uiactdecisvillage == "1") //shop make a new method aka instrument for shop
+            {
+                ShopVillage();
+                villagexit = false;
+            }
+            else if (uiactdecisvillage == "2") // tavern
+            {
+
+            }
+            else if (uiactdecisvillage == "3") // Guild **Make it later after finishing mines and 1 & 2 village lines.
+            {
+
+            }
+            else if (uiactdecisvillage == "4")
+            {
+                Console.WriteLine(Game.player.PrintCharInfo());
+                Thread.Sleep(2000);
+                Console.WriteLine("");
+                villagexit = false;
+            }
+            else if (uiactdecisvillage == "5") //exit village
+            {
+                Console.WriteLine("You decide to go out of the village and head back to the forest!");
+                villageexitdecis = "1";
+
+
+            }
+            else { Console.WriteLine("Invalid Input"); }
+
+        } while (!villagexit);
+        return villageexitdecis;
+    }
+
+    public static void ShopVillage()
+    {
+        bool exitshop = false;
+        Console.WriteLine("You enter the shop");
+        Thread.Sleep(2500);
+        Console.WriteLine("The merchant greets you with tired eyes");
+        Thread.Sleep(2500);
+        Console.WriteLine("–Welcome to my shop.");
+        Thread.Sleep(2500);
+        Console.WriteLine("");
+        do
+        {
+            Console.WriteLine("1. Trade");
+            Console.WriteLine("2. Ask questions");
+            Console.WriteLine("3. Exit the shop");
+            Thread.Sleep(1000);
+            Console.WriteLine("");
+            string uiactshop1 = Console.ReadLine();
+            if (uiactshop1 == "1")
+            {
+                Console.WriteLine("You approach the merchant.");
+                Thread.Sleep(2500);
+                Console.WriteLine("–What do you want to trade?");
+                Thread.Sleep(2500);
+                Trade.TradeSystem();
+            }
+            else if (uiactshop1 == "2")
+            {
+                Console.WriteLine("You ask the merchant about the village.");
+                Thread.Sleep(2500);
+                // Implement question logic here
+            }
+            else if (uiactshop1 == "3")
+            {
+                Console.WriteLine("You leave the shop.");
+                Thread.Sleep(2500);
+                exitshop = true;
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input");
+            }
+        } while (!exitshop);
+    }
+    
 }
