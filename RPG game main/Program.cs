@@ -106,7 +106,7 @@ class Game
                         if (uactdecis3 == "1") // mines
                         {
                             Cutsczene.PlotB1V1("1");
-                            uactdecis3 = "2"; 
+                            uactdecis3 = "2";
 
 
                         }
@@ -114,6 +114,7 @@ class Game
                         {
                             Cutsczene.PlotB1V2("1");
                             uactdecis3 = "1";
+                            plotloop2 = false;
 
                         }
                     } while (!plotloop2);

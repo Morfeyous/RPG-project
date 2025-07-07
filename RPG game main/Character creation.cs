@@ -1,5 +1,6 @@
 namespace RPG;
 
+//TODO: Inheritance und Schnittstellen
 public class Character
 {
     public string Name { get; set; }
@@ -14,7 +15,7 @@ public class Character
 
     public List<Items> Inventory { get; set; } = new List<Items>(); // Weapon and inventory lists
     public List<weapon> Weapons { get; set; } = new List<weapon>();
-    
+
 
     public Character() { }
 
@@ -31,7 +32,7 @@ public class Character
 
     static public Character Creation()
     {
-        
+
         Character char1 = null;
         bool exitclasscreation = false;
         Console.WriteLine("Chose the name of the character!");
@@ -51,7 +52,7 @@ public class Character
             string userchar = Console.ReadLine();
             if (userchar == "1")
             {
-                char1 = new Character(Nameinp, Surnameinp, Ageinp, 100, 15, 13, 1);
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 100, 15, 14, 1);
                 //TODO: Vielleicht keine Liste sondern ein Character
                 //Diesen Character dann überall verwenden
                 exitclasscreation = true;
@@ -63,14 +64,19 @@ public class Character
             }
             else if (userchar == "3")
             {
-                char1 = new Character(Nameinp, Surnameinp, Ageinp, 50, 25, 11, 10);
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 50, 25, 13, 10);
+                exitclasscreation = true;
+            }
+            else if (userchar == "5233")
+            {
+                char1 = new Character(Nameinp, Surnameinp, Ageinp, 150, 40, 13, 10);
                 exitclasscreation = true;
             }
             else { Console.WriteLine("Invalid Input!"); }
         } while (!exitclasscreation);
 
         return char1;
-        
+
     }
     public string PrintCharInfo()
     {
