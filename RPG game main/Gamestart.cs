@@ -874,9 +874,11 @@ public class Cutsczene
         int exprand = exprandomiser.Next(101);
         int exptries = 0;
         bool exitmine = false;
+        Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
+         Enemylist.Enemlist.Add(goblin);
         if (firstenc == "1")
         {
-            Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
+            //Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
             Enemylist.Enemlist.Add(goblin);
             Narrate("You enter the mine and see that the path forward is lit by glowing crystals embedded in the walls.", 2500);
             Narrate("Its cold and quiet and it seems like there is no one inside", 2500);
@@ -893,14 +895,16 @@ public class Cutsczene
             string uinpdecismines = Console.ReadLine();
             if (uinpdecismines == "1")
             {
+                exprand = 1; //debug reasonschange laterrrr
                 exptries++;
-                if (exptries > 4)
+                if (exptries > 6)
                 {
                     Narrate("After exploring the mine for some time you find a new passage!", 2500);
                     Narrate("It looks like it leads deeper into the mine", 2500);
                     Narrate("You can go deeper or leave the mine", 2500);
                     do
                     {
+                        
                         Narrate("What do you do?", 2500);
                         Narrate("1. Go deeper into the mine", 0);
                         Narrate("2. Leave the mine", 0);
@@ -926,31 +930,43 @@ public class Cutsczene
                     return "2";
                 }
                 Narrate("You decide to explore the mine", 2500);
-                if (exprand < 10 && exprand > 0)
+                if (exprand == 2)  //debug fix
                 {
                     Narrate("You find a small chest with 50 gold inside", 2500);
                     Game.herogold.Gold += 50;
                     Narrate("You can continue exploring or leave the mine", 2500);
                 }
-                else if (exprand > 10 && exprand < 30)
+                else if (exprand == 1) // debug reasons change to 30 later
                 {
                     Narrate("You encounter a goblin!", 2500);
                     Narrate("The goblin attacks you!", 2500);
                     int CharHP = Game.player.HP;
-                    Narrate("What weapon do you want to use?", 2500);
-                    foreach (weapon wpn in Weaponlist.Weaponlists)
-                    {
-                        Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
-                    }
-                    var uinpweap = Console.ReadLine();
-                    var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == uinpweap);
-                    int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
-                    int EnemyDmg = Enemylist.Enemlist[4].EnemyDmg;
-                    int EnemyHP = Enemylist.Enemlist[4].EnemyHealth;
-                    int enemyini = Enemylist.Enemlist[4].EnemyINI;
-                    string enemytype = Enemylist.Enemlist[4].EnemyType;
+                   Narrate("What weapon do you want to use?", 2500);
+foreach (weapon wpn in Weaponlist.Weaponlists)
+{
+    Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
+}
+
+weapon selectedWeapon = null;
+do
+{
+    Console.Write("Enter weapon name: ");
+    var uinpweap = Console.ReadLine();
+    selectedWeapon = Weaponlist.Weaponlists
+        .FirstOrDefault(item => item.WpnName.Equals(uinpweap, StringComparison.OrdinalIgnoreCase));
+    if (selectedWeapon == null)
+    {
+        Console.WriteLine("Weapon not found. Please enter the name exactly as shown above.");
+    }
+} while (selectedWeapon == null);
+
+int CharDmg = Game.player.Damage + selectedWeapon.DamageBonus;
+int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyDmg;
+                    int EnemyHP = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyHealth;
+                    int enemyini = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyINI;
+                    string enemytype = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyType;
                     Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
-                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 4, Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Small Pickaxe").Hitbonus);
+                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 4, selectedWeapon.Hitbonus);
                     if (combat2 == true)
                     {
                         Narrate("You defeated the goblin!", 2500);

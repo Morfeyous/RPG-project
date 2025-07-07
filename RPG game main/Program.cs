@@ -66,38 +66,43 @@ class Game
                 else
                 {
                     bool plotloop1 = true;
+                   /*
                     bool plotloop2 = true;
                     Cutsczene.StartingSzene();
                     string uinpdecis1 = Cutsczene.PlotM1();
                     string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
                     string uactdecis2 = Cutsczene.PlotM3(uactfight1);
-                    string uactdecis3 = "0";
-                    do
-                    {
-                        if (uactdecis2 == "1")
-                        {
-                            string plotb2end = Cutsczene.PlotB2V1("1");
-                            uactdecis2 = plotb2end;
-                            plotloop1 = false;
-                        }
-                        else if (uactdecis2 == "2")
-                        {
-                            uactdecis3 = Cutsczene.PlotB2V2(); //DOUBLE CHECK THE DECISIONS NOT SURE IF THEY HAVE RIGHT OUTCOMES!!!!!***
-                            uactdecis2 = uactdecis3;
-                            plotloop1 = false;
+                    */
+                    bool plotloop2 = true;
+                    string uactdecis3 = "2";
+                    Game.herogold.Gold = 10000; //DEBUGGING PURPOSES REMOVE LATER
+                   /* do
+                     {
+                         if (uactdecis2 == "1")
+                         {
+                             string plotb2end = Cutsczene.PlotB2V1("1");
+                             uactdecis2 = plotb2end;
+                             plotloop1 = false;
+                         }
+                         else if (uactdecis2 == "2")
+                         {
+                             uactdecis3 = Cutsczene.PlotB2V2(); //DOUBLE CHECK THE DECISIONS NOT SURE IF THEY HAVE RIGHT OUTCOMES!!!!!***
+                             uactdecis2 = uactdecis3;
+                             plotloop1 = false;
 
 
-                        }
-                        else if (uactdecis2 == "3")
-                        {
-                            uactdecis3 = Cutsczene.PlotB1();//1 - mines // 2 - Village
-                            plotloop1 = true;
+                         }
+                         else if (uactdecis2 == "3")
+                         {
+                             uactdecis3 = Cutsczene.PlotB1();//1 - mines // 2 - Village
+                             plotloop1 = true;
 
 
 
 
-                        }
-                    } while (!plotloop1);
+                         }
+                     } while (!plotloop1);
+                     */
                     do
                     {
 
@@ -105,14 +110,15 @@ class Game
 
                         if (uactdecis3 == "1") // mines
                         {
-                            Cutsczene.PlotB1V1("1");
+                            Cutsczene.PlotB1V1("2");
                             uactdecis3 = "2";
+                            plotloop2 = false;
 
 
                         }
                         else if (uactdecis3 == "2") //village
                         {
-                            Cutsczene.PlotB1V2("1");
+                            Cutsczene.PlotB1V2("2");
                             uactdecis3 = "1";
                             plotloop2 = false;
 

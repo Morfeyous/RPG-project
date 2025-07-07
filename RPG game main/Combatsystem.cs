@@ -26,7 +26,7 @@ public class Combat
         int TempEndmg = EnemyDmg;
         int TempChrHp = CharHP;
         int TempEnHp = EnemyHP;
-        int Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
+        int Enemyac = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == enemy).Enemyac;
         int ACbonus = 0;
         int CharAC1 = Game.player.AC + ACbonus; //TODO: Later add weapon bonus
         bool combatend = false;
@@ -77,7 +77,7 @@ public class Combat
         }
         do
         {
-            int CharACMain = Game.player.AC + ACbonus; //TODO: Later add weapon bonus
+            int CharACMain = Game.player.AC + ACbonus; 
             if (turnorder == 0)
             {
                 Console.WriteLine("It is your turn!");
@@ -87,7 +87,7 @@ public class Combat
                 Console.WriteLine("What will you do in your turn?");
                 Console.WriteLine("1. Attack");
                 Console.WriteLine("2. Defend");
-                Console.WriteLine("3. Stats");  //TODO add items in future. Now focus on combat system//
+                Console.WriteLine("3. Stats");  
                 Console.WriteLine("4. Escape");
                 Console.WriteLine("5. Heal");
                 Console.WriteLine("");
@@ -239,13 +239,13 @@ public class Combat
             }
             else if (turnorder == 1)
             {
-                Enemyac = Enemylist.Enemlist[enemyid].Enemyac;
+                Enemyac = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == enemy).Enemyac;
                 Console.WriteLine($"{enemy} Has the turn!");
                 Thread.Sleep(1000);
                 int enact = combatrandomiser.Next(100);
                 if (enact < 33)
                 {
-                    int enhit = combatrandomiser.Next(20) + Enemylist.Enemlist[enemyid].Enemyatackbonus;
+                    int enhit = combatrandomiser.Next(21) + Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == enemy).Enemyatackbonus;
                     if (enhit > CharACMain)
                     {
                         Console.WriteLine($"{enemy} atacks you!");
@@ -289,7 +289,7 @@ public class Combat
                 else if (enact > 91)
                 {
                     double percent = 25;
-                    double percentage = Enemylist.Enemlist[enemyid].EnemyHealth * percent / 100;
+                    double percentage = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == enemy).EnemyHealth * percent / 100;
                     int healed = Convert.ToInt32(percentage);
                     TempEnHp += healed;
                     Console.WriteLine($"{enemy} heals itself with some kind of magic!");
