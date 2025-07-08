@@ -422,24 +422,15 @@ public class Cutsczene
     {
         int uinpdesiccross = 0;
         bool crossroadend2 = false;
-        Console.WriteLine("You decide to follow the road!");
-        Thread.Sleep(3000);
-        Console.WriteLine("This road looks like the only thread connecting you to the real world");
-        Thread.Sleep(3000);
-        Console.WriteLine("And the dark forest around you is something that goes out of it");
-        Thread.Sleep(3000);
-        Console.WriteLine("After a brief moment of walking you notice that road starts to widen");
-        Thread.Sleep(3000);
-        Console.WriteLine("Finaly you reach an another crossroad");
-        Thread.Sleep(3000);
-        Console.WriteLine("The road goes left and right");
-        Thread.Sleep(3000);
-        Console.WriteLine("You also see a sign that says");
-        Thread.Sleep(3000);
-        Console.WriteLine("Crystal Mines--> \n <--Miner Village");
-        Thread.Sleep(3000);
-        Console.WriteLine("And yet again it is your decision where to go");
-        Thread.Sleep(3000);
+        Narrate("You decide to follow the road!", 2000);
+        Narrate("This road looks like the only thread connecting you to the real world", 2000);
+        Narrate("And the dark forest around you is something that goes out of it", 2000);
+        Narrate("After a brief moment of walking you notice that road starts to widen", 2000);
+        Narrate("Finaly you reach an another crossroad", 2000);
+        Narrate("The road goes left and right", 2000);
+        Narrate("You also see a sign that says", 2000);
+        Narrate("Crystal Mines--> \n <--Miner Village", 2000);
+        Narrate("And yet again it is your decision where to go", 2000);
         do
         {
             Console.WriteLine("1.Crystal Mines");
@@ -733,45 +724,26 @@ public class Cutsczene
     {
         if (firstenc == "1")
         {
-            Console.WriteLine("");
-            Thread.Sleep(1000);
-            Console.WriteLine("You decide to go to the village");
-            Thread.Sleep(2500);
-            Console.WriteLine("Seeing someone alive and not willing to kill you would be great");
-            Thread.Sleep(2500);
-            Console.WriteLine("You walk the path for some time and the forest start to fade away");
-            Thread.Sleep(2500);
-            Console.WriteLine("You can see a small village on the open field in the distance");
-            Thread.Sleep(2500);
-            Console.WriteLine("You notice mountains far away behind the village");
-            Thread.Sleep(2500);
-            Console.WriteLine("One of them looks different");
-            Thread.Sleep(2500);
-            Console.WriteLine("It is covered with unnaturaly blue clouds that storm with purple lightnings");
-            Thread.Sleep(2500);
-            Console.WriteLine("You cant hear them, but you feel the power the mountain radiates");
-            Thread.Sleep(2500);
-            Console.WriteLine("It scares you");
-            Thread.Sleep(2500);
-            Console.WriteLine("But you decide to go forward. You enter the village through the main road");
-            Thread.Sleep(2500);
-            Console.WriteLine("The guard post is empty on the village entrance");
-            Thread.Sleep(2500);
-            Console.WriteLine("You go towards the centre of the village and look around");
-            Thread.Sleep(2500);
-            Console.WriteLine("You notice people. They look at you with tired neutral eyes");
-            Thread.Sleep(2500);
-            Console.WriteLine("All of them are near their houses, some are busy with their housework");
-            Thread.Sleep(2500);
-            Console.WriteLine("And some just sit there and watch you");
+            Narrate("", 0);
+            Narrate("Seeing someone alive and not willing to kill you would be great", 2500);
+            Narrate("You walk the path for some time and the forest start to fade away", 2500);
+            Narrate("You can see a small village on the open field in the distance", 2500);
+            Narrate("You notice mountains far away behind the village", 2500);
+            Narrate("One of them looks different", 2500);
+            Narrate("It is covered with unnaturaly blue clouds that storm with purple lightnings", 2500);
+            Narrate("You cant hear them, but you feel the power the mountain radiates", 2500);
+            Narrate("It scares you", 2500);
+            Narrate("But you decide to go forward. You enter the village through the main road", 2500);
+            Narrate("The guard post is empty on the village entrance", 2500);
+            Narrate("You go towards the centre of the village and look around", 2500);
+            Narrate("You notice people. They look at you with tired neutral eyes", 2500);
+            Narrate("All of them are near their houses, some are busy with their housework", 2500);
+            Narrate("And some just sit there and watch you", 2500);
         }
         bool villagexit = false;
         string villageexitdecis = "0";
-        Thread.Sleep(2500);
-        Console.WriteLine("You reach the centre of the village");
-        Thread.Sleep(2500);
-        Console.WriteLine("You have options where to go next!");
-        Thread.Sleep(2500);
+        Narrate("You reach the centre of the village", 2500);
+        Narrate("You have options where to go next", 2500);
         do
         {
             Console.WriteLine("");
@@ -874,11 +846,9 @@ public class Cutsczene
         int exprand = exprandomiser.Next(101);
         int exptries = 0;
         bool exitmine = false;
-        Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
-         Enemylist.Enemlist.Add(goblin);
         if (firstenc == "1")
         {
-            //Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
+            Enemy goblin = new Enemy("Goblin", 20, 100, 5, 5, 0, 4); //id 4
             Enemylist.Enemlist.Add(goblin);
             Narrate("You enter the mine and see that the path forward is lit by glowing crystals embedded in the walls.", 2500);
             Narrate("Its cold and quiet and it seems like there is no one inside", 2500);
@@ -895,7 +865,7 @@ public class Cutsczene
             string uinpdecismines = Console.ReadLine();
             if (uinpdecismines == "1")
             {
-                exprand = 1; //debug reasonschange laterrrr
+                exprand = exprandomiser.Next(101);
                 exptries++;
                 if (exptries > 6)
                 {
@@ -930,38 +900,37 @@ public class Cutsczene
                     return "2";
                 }
                 Narrate("You decide to explore the mine", 2500);
-                if (exprand == 2)  //debug fix
+                if (exprand > 10 && exprand < 30) 
                 {
                     Narrate("You find a small chest with 50 gold inside", 2500);
                     Game.herogold.Gold += 50;
                     Narrate("You can continue exploring or leave the mine", 2500);
                 }
-                else if (exprand == 1) // debug reasons change to 30 later
+                else if (exprand > 31 && exprand < 70)
                 {
                     Narrate("You encounter a goblin!", 2500);
                     Narrate("The goblin attacks you!", 2500);
                     int CharHP = Game.player.HP;
-                   Narrate("What weapon do you want to use?", 2500);
-foreach (weapon wpn in Weaponlist.Weaponlists)
-{
-    Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
-}
+                    Narrate("What weapon do you want to use?", 2500);
+                    foreach (weapon wpn in Weaponlist.Weaponlists)
+                      {
+                        Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
+                      }
 
-weapon selectedWeapon = null;
-do
-{
-    Console.Write("Enter weapon name: ");
-    var uinpweap = Console.ReadLine();
-    selectedWeapon = Weaponlist.Weaponlists
-        .FirstOrDefault(item => item.WpnName.Equals(uinpweap, StringComparison.OrdinalIgnoreCase));
-    if (selectedWeapon == null)
-    {
-        Console.WriteLine("Weapon not found. Please enter the name exactly as shown above.");
-    }
-} while (selectedWeapon == null);
+                    weapon selectedWeapon = null;
+                do
+                    {
+                    Console.Write("Enter weapon name: ");
+                    var uinpweap = Console.ReadLine();
+                    selectedWeapon = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName.Equals(uinpweap, StringComparison.OrdinalIgnoreCase));
+                    if (selectedWeapon == null)
+                    {
+                    Console.WriteLine("Weapon not found. Please enter the name exactly as shown above.");
+                    }
+                } while (selectedWeapon == null);
 
-int CharDmg = Game.player.Damage + selectedWeapon.DamageBonus;
-int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyDmg;
+                    int CharDmg = Game.player.Damage + selectedWeapon.DamageBonus;
+                    int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyDmg;
                     int EnemyHP = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyHealth;
                     int enemyini = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyINI;
                     string enemytype = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").EnemyType;
@@ -975,11 +944,12 @@ int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").E
                     }
                     else
                     {
+                        Narrate("You Escaped", 2500);
                         Narrate("You can leave the mine now", 2500);
-                        exitmine = true;
+                        exitmine = false;
                     }
                 }
-                else if (exprand > 30 && exprand < 70)
+                else if (exprand > 70 && exprand < 90)
                 {
                     Narrate("You find a small chest with 10 gold inside", 2500);
                     Game.herogold.Gold += 10;
@@ -1077,14 +1047,31 @@ int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").E
                     Narrate("You encounter a Goblin veteran!", 2000);
                     Narrate("He looks stronger than the ohters and is wielding a rusty iron sword!", 2000);
                     int CharHP = Game.player.HP;
-                    var stick = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Small Pickaxe");
-                    int CharDmg = Game.player.Damage + (stick?.DamageBonus ?? 0);
-                    int EnemyDmg = Enemylist.Enemlist[5].EnemyDmg;
-                    int EnemyHP = Enemylist.Enemlist[5].EnemyHealth;
-                    int enemyini = Enemylist.Enemlist[5].EnemyINI;
-                    string enemytype = Enemylist.Enemlist[5].EnemyType;
+                   Narrate("What weapon do you want to use?", 2500);
+                   foreach (weapon wpn in Weaponlist.Weaponlists)
+                      {
+                        Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
+                      }
+
+                    weapon selectedWeapon = null;
+                do
+                    {
+                    Console.Write("Enter weapon name: ");
+                    var uinpweap = Console.ReadLine();
+                    selectedWeapon = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName.Equals(uinpweap, StringComparison.OrdinalIgnoreCase));
+                    if (selectedWeapon == null)
+                    {
+                    Console.WriteLine("Weapon not found. Please enter the name exactly as shown above.");
+                    }
+                } while (selectedWeapon == null);
+
+                    int CharDmg = Game.player.Damage + selectedWeapon.DamageBonus;
+                    int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin Veteran").EnemyDmg;
+                    int EnemyHP = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin Veteran").EnemyHealth;
+                    int enemyini = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin Veteran").EnemyINI;
+                    string enemytype = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin Veteran").EnemyType;
                     Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
-                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 5, Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName == "Small Pickaxe").Hitbonus);
+                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 4, selectedWeapon.Hitbonus);
                     if (combat2 == true)
                     {
                         Narrate("You defeated the goblin veteran!", 2500);
@@ -1094,9 +1081,8 @@ int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Goblin").E
                     else
                     {
                         Narrate("You can leave the mine now", 2500);
-                        Narrate("Or explore more", 1500);
+                        exitdeep = false;
                     }
-
                 }
                 else
                 {
@@ -1162,36 +1148,238 @@ public static string VillageShopAsk()
         return "";
     }
 
+    public static void bossfight()
+    {
+        Narrate("You enter the big spacious room filled with crystals that light the room with bright red and orange light", 3000);
+        Narrate("In the middle of the room you see a big creature, you look closer", 2500);
+        Narrate("It is a big dragon sleeping on a pile of gold and artifacts", 2000);
+        Narrate("The dragon is covered with crystals that grow on his body creating sort of an armor", 3000);
+        Enemy crystaldragon = new Enemy("Crystal Dragon", 50, 400, 10, 16, 5, 7);
+        Enemylist.Enemlist.Add(crystaldragon);
+        Narrate("It is still asleep so you have an opportunity to make the first move!", 2000);
+        Narrate("What will you do?", 1000);
+        Narrate("1. Try to attack the dragon ", 0);
+        Narrate("2. Try to look around silently and find something usefull", 0);
+        Narrate("3. Escape", 0);
+        Narrate("", 0);
+        string uiactbossfight1 = Console.ReadLine();
+        if (uiactbossfight1 == "1")
+        {
+            Narrate("You decide to try and attack the dragon to catch it by surprise", 1500);
 
 
+        }
+        else if (uiactbossfight1 == "2")
+        {
+
+        }
+        else if (uiactbossfight1 == "3")
+        {
+
+        }
+        else { Narrate("Invalid input", 0); }
+
+    }
+
+    public static void bossfightM1()
+    {
+        int dragonhp = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Crystal Dragon").EnemyHealth;
+        bool dragexit = false;
+        Narrate("Dragon sleeps and seems to be unaware of your plan", 1000);
+        Narrate("You have an opportunity to chose where to strike!", 1000);
+        Random combatrandomiser = new Random();
+        do
+        {
+            int strikechance = combatrandomiser.Next(101);
+            Narrate("", 0);
+            Narrate("1. Try to strike his neck", 0);
+            Narrate("2. Try to strike his head", 0);
+            Narrate("3. Try to strike his Belly", 0);
+            Narrate("4. Try to strike his Limb", 0);
+            Narrate("", 0);
+            string strikedecis = Console.ReadLine();
+            if (strikedecis == "1")
+            {
+                Narrate("You decide to strike the neck of the dragon", 1000);
+                if (strikechance < 10)
+                {
+                    Narrate("By a miracle you cut the neck of the dragon off.", 1000);
+                    Narrate("The dragon is dead!", 1000);
+                    Narrate("You won!", 1000);
+                    Narrate("Game over!", 4000);
+                    Exit.Exitopt();
+                }
+                else if (strikechance > 10 && strikechance < 30)
+                {
+                    Narrate("You succesfully strike dragons neck!", 1000);
+                    Narrate("Dragon sustains heavy damage!", 1000);
+                    dragonhp -= 200;
+                    Narrate("It wakes up and looks really angry", 1000);
 
 
+                }
 
+            }
+            else if (strikedecis == "2")
+            {
+
+            }
+            else if (strikedecis == "3")
+            {
+
+            }
+            else if (strikedecis == "4")
+            {
+
+            }
+            else { Narrate("Invalid Command", 0); }
+        } while (!dragexit);
+
+
+   
+
+    }
+
+    public static void bossfightM2()
+    {
+        Narrate("Dragon woke up and looks at you with anger in his yellow eyes", 1000);
+
+        
+    }
 
 
 
 
     public static string PlotB1V1M3(string firstenc) // Lost Mines
     {
+
         if (firstenc == "1")
         {
+            Enemy ancientguard = new Enemy("Ancient Guard", 30, 200, 5, 13, 4, 6); //id 6
+            Enemylist.Enemlist.Add(ancientguard);
             Narrate("You enter the Lost Mines", 2500);
             Narrate("The crystals here are glowing with a strange purple light", 2500);
             Narrate("You feel a strange energy in the air", 2500);
             Narrate("You can hear distant sounds of mining and voices", 2500);
         }
+        int exptries = 0;
         bool exitlost = false;
         Narrate("You can explore the Lost Mines or leave them", 2500);
         do
         {
+            bool bossexit = false;
+            Random exprandomiser = new Random();
+            int exprand = exprandomiser.Next(101);
             Narrate("", 0);
             Narrate("1. Explore the Lost Mines", 0);
             Narrate("2. Leave the Lost Mines", 0);
             string uinpdecislost = Console.ReadLine();
             if (uinpdecislost == "1")
             {
+                if (exptries > 3)
+                {
+                    Narrate("After exploring the Lost Mines you find a hidden passage!", 2500);
+                    Narrate("It looks like it leads to a huge wooden gate", 2500);
+                    Narrate("You can go deeper or leave the Lost Mines", 2500);
+                    do
+                    {
+                        Narrate("What do you do?", 2500);
+                        Narrate("1. Go deeper into passage", 0);
+                        Narrate("2. Leave the Lost Mines", 0);
+                        string uinpdecislostdeep = Console.ReadLine();
+                        if (uinpdecislostdeep == "1")
+                        {
+                            do
+                            {
+                                Narrate("You go towards the gate", 2500);
+                                Narrate("Are you sure you want to enter?", 2500);
+                                Narrate("", 0);
+                                Narrate("1. Enter the Boss room", 0);
+                                Narrate("2. Go back and comeback later", 0);
+                                Narrate("", 0);
+                                string uiactdeciboss = Console.ReadLine();
+                                if (uiactdeciboss == "1")
+                                {
+                                    //bossfight
+
+                                }
+                                else if (uiactdeciboss == "2")
+                                {
+                                    bossexit = true;
+                                }
+                                else { Narrate("Invalid Input", 0); }
+                                break;
+                            } while (!bossexit);
+                        }
+                        else if (uinpdecislostdeep == "2")
+                        {
+                            Narrate("You decide to leave the Lost Mines", 2500);
+                            exitlost = true;
+                        }
+                        else
+                        {
+                            Narrate("Invalid Input", 2500);
+                            continue;
+                        }
+                    } while (!exitlost);
+                }
                 Narrate("You decide to explore the Lost Mines", 2500);
-                // TODO add exploration logic here
+                if (exprand > 10)
+                {
+                    Narrate("You find a big gold chest!", 1000);
+                    Narrate("You recieve 200 gold!", 1500);
+                    Game.herogold.Gold += 200;
+                    exitlost = false;
+                }
+                else if (exprand < 10 && exprand > 33)
+                {
+                    Narrate("You find a crystal dagger!", 2000);
+                    weapon dagger = new weapon("Crystal Dagger", 15, 5);
+                    Weaponlist.Weaponlists.Add(dagger);
+
+                }
+                else if (exprand < 33 && exprand > 90)
+                {
+                    Narrate("You encounter an Ancient Guard!", 1500);
+                    int CharHP = Game.player.HP;
+                    Narrate("What weapon do you want to use?", 2500);
+                    foreach (weapon wpn in Weaponlist.Weaponlists)
+                    {
+                        Narrate($"{wpn.WpnName} - Damage: {wpn.DamageBonus} Hitbonus: {wpn.Hitbonus}", 200);
+                    }
+
+                    weapon selectedWeapon = null;
+                    do
+                    {
+                        Console.Write("Enter weapon name: ");
+                        var uinpweap = Console.ReadLine();
+                        selectedWeapon = Weaponlist.Weaponlists.FirstOrDefault(item => item.WpnName.Equals(uinpweap, StringComparison.OrdinalIgnoreCase));
+                        if (selectedWeapon == null)
+                        {
+                            Console.WriteLine("Weapon not found. Please enter the name exactly as shown above.");
+                        }
+                    } while (selectedWeapon == null);
+
+                    int CharDmg = Game.player.Damage + selectedWeapon.DamageBonus;
+                    int EnemyDmg = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Ancient Guard").EnemyDmg;
+                    int EnemyHP = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Ancient Guard").EnemyHealth;
+                    int enemyini = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Ancient Guard").EnemyINI;
+                    string enemytype = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == "Ancient Guard").EnemyType;
+                    Combat fight3 = new Combat(EnemyHP, CharHP, EnemyDmg, CharDmg);
+                    bool combat2 = fight3.Fight(enemytype, 0, enemyini, 4, selectedWeapon.Hitbonus);
+                    if (combat2 == true)
+                    {
+                        Narrate("You defeated the ancient guard!", 2500);
+                        Narrate("You can continue exploring or leave the mine", 2500);
+                        Game.herogold.Gold += 100;
+                    }
+                    else
+                    {
+                        Narrate("You can leave the mine now", 2500);
+                        exitlost = false;
+                    }
+
+                }
                 return "1";
             }
             else if (uinpdecislost == "2")

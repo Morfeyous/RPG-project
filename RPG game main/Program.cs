@@ -66,17 +66,15 @@ class Game
                 else
                 {
                     bool plotloop1 = true;
-                   /*
+                   
                     bool plotloop2 = true;
                     Cutsczene.StartingSzene();
                     string uinpdecis1 = Cutsczene.PlotM1();
                     string uactfight1 = Cutsczene.PlotM2(uinpdecis1);
                     string uactdecis2 = Cutsczene.PlotM3(uactfight1);
-                    */
-                    bool plotloop2 = true;
+                    
                     string uactdecis3 = "2";
-                    Game.herogold.Gold = 10000; //DEBUGGING PURPOSES REMOVE LATER
-                   /* do
+                    do
                      {
                          if (uactdecis2 == "1")
                          {
@@ -102,7 +100,7 @@ class Game
 
                          }
                      } while (!plotloop1);
-                     */
+                    
                     do
                     {
 

@@ -28,7 +28,7 @@ public class Combat
         int TempEnHp = EnemyHP;
         int Enemyac = Enemylist.Enemlist.FirstOrDefault(e => e.EnemyType == enemy).Enemyac;
         int ACbonus = 0;
-        int CharAC1 = Game.player.AC + ACbonus; //TODO: Later add weapon bonus
+        int CharAC1 = Game.player.AC + ACbonus;
         bool combatend = false;
         int turnorder = 0;
         Random combatrandomiser = new Random();
@@ -131,7 +131,7 @@ public class Combat
                     else if (hit == 20)
                     {
                         Console.WriteLine("You scored a critical hit!");
-                        TempChrdmg = combatrandomiser.Next(CharDmg) * 2;
+                        TempChrdmg = combatrandomiser.Next(CharDmg) * 2 + 10; // Critical hit bonus
                         TempEnHp = TempEnHp - TempChrdmg;
                         Thread.Sleep(1000);
                         Console.WriteLine($"{enemy} sustained {TempChrdmg} damage!");
