@@ -939,7 +939,7 @@ public class Cutsczene
                     if (combat2 == true)
                     {
                         Narrate("You defeated the goblin!", 2500);
-                        Narrate("You can continue exploring or leave the mine", 2500);
+                        Narrate("You recieve 20 gold!", 2500);
                         Game.herogold.Gold += 20;
                     }
                     else
@@ -981,13 +981,13 @@ public class Cutsczene
             Narrate("The Deep mines were still covered with glowing crystals but the color changed from purple to blue", 2500);
         }
         Random exprandomiser = new Random();
-        int exprand = exprandomiser.Next(101);
         int exptries = 0;
         bool exitdeep = false;
         Narrate("You go forward and you have an option to explore The Deep Mines", 2500);
         Narrate("What do you do?", 1000);
         do
         {
+            int exprand = exprandomiser.Next(101);
             Narrate("", 0);
             Narrate("1. Explore the Deep Mines", 0);
             Narrate("2. Leave the Deep Mines", 0);
@@ -1000,6 +1000,21 @@ public class Cutsczene
                 {
                     Narrate("After exploring the Deep Mines for some time you find yet another passage", 2000);
                     Narrate("Do you want to go there?", 2000);
+                    Narrate("1. Go into the Lost Mines",0);
+                    Narrate("2. Go back", 0);
+                    Narrate("", 0);
+                    string uiactdecilost = Console.ReadLine();
+                    if (uiactdecilost == "1")
+                    {
+                        string lostmines = Cutsczene.PlotB1V1M3("1");
+
+                    }
+                    else if (uiactdecilost == "2")
+                    {
+                        exitdeep = true;
+
+                    }
+                    else { Narrate("Invalid Input", 0); }
                     do
                     {
                         Narrate("1. Go deeper into the Deep Mines", 0);
@@ -1015,7 +1030,6 @@ public class Cutsczene
                         {
                             Narrate("You decide to leave the Deep Mines", 2500);
                             exitdeep = true;
-                            return "2"; //return to crossroad
                         }
                         else
                         {
